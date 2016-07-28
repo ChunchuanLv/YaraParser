@@ -22,10 +22,10 @@ public class API_UsageExample {
 
         ArrayList<Integer> dependencyLabels = infStruct.dependencyLabels;
         IndexMaps maps = infStruct.maps;
-        AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct);
+        AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct,maps);
 
         int featureSize = averagedPerceptron.featureSize();
-        KBeamArcEagerParser parser = new KBeamArcEagerParser(averagedPerceptron, dependencyLabels, featureSize, maps, numOfThreads);
+        KBeamArcEagerParser parser = new KBeamArcEagerParser(averagedPerceptron, dependencyLabels, featureSize, maps, numOfThreads,false,false);
 
         String[] words = {"I", "am", "here", "."};
         String[] tags = {"PRP", "VBP", "RB", "."};

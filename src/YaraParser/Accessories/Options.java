@@ -28,6 +28,8 @@ public class Options implements Serializable {
     public String scorePath;
     public String clusterFile;
 
+    public String repPath;
+    public boolean depMat ;
     public String modelFile;
     public boolean lowercase;
     public boolean useExtendedFeatures;
@@ -52,6 +54,8 @@ public class Options implements Serializable {
         parseTaggedFile = false;
         beamWidth = 64;
         rootFirst = false;
+        depMat = false;
+        repPath = "";
         modelFile = "";
         outputFile = "";
         inputFile = "";
@@ -217,6 +221,10 @@ public class Options implements Serializable {
                 options.rootFirst = true;
             else if (args[i].startsWith("iter:"))
                 options.trainingIter = Integer.parseInt(args[i].substring(args[i].lastIndexOf(":") + 1));
+            else if (args[i].startsWith("depMat"))
+            	options.depMat = true;
+            else if (args[i].startsWith("-repPath"))
+            	options.repPath   = args[i + 1];
         }
 
         if (options.train || options.parseTaggedFile || options.parseConllFile)
@@ -357,6 +365,8 @@ public class Options implements Serializable {
             builder.append("training-iterations: " + trainingIter + "\n");
             builder.append("number of threads: " + numOfThreads + "\n");
             builder.append("partial training starting iteration: " + partialTrainingStartingIteration + "\n");
+            builder.append("repPath: " + repPath + "\n");
+            builder.append("depMat: " + depMat + "\n");
             return builder.toString();
         } else if (parseConllFile) {
             StringBuilder builder = new StringBuilder();

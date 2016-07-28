@@ -26,8 +26,8 @@ public class ParseTaggedThread implements Callable<Pair<String, Integer>> {
     IndexMaps maps;
     int beamWidth;
     KBeamArcEagerParser parser;
-
-    public ParseTaggedThread(int lineNum, String line, String delim, boolean rootFirst, boolean lowerCased, IndexMaps maps, int beamWidth, KBeamArcEagerParser parser) {
+    boolean dep;boolean depMat;
+    public ParseTaggedThread(int lineNum, String line, String delim, boolean rootFirst, boolean lowerCased, IndexMaps maps, int beamWidth, KBeamArcEagerParser parser,boolean dep,boolean depMat) {
         this.lineNum = lineNum;
         this.line = line;
         this.delim = delim;
@@ -36,6 +36,8 @@ public class ParseTaggedThread implements Callable<Pair<String, Integer>> {
         this.maps = maps;
         this.beamWidth = beamWidth;
         this.parser = parser;
+        this.dep = dep;
+        this.depMat = depMat;
     }
 
     @Override

@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Jama.Matrix;
+
 public class IndexMaps implements Serializable {
     public final String rootString;
     public String[] revWords;
@@ -17,12 +19,30 @@ public class IndexMaps implements Serializable {
     private HashMap<Integer, Integer> brown4Clusters;
     private HashMap<Integer, Integer> brown6Clusters;
     private HashMap<String, Integer> brownFullClusters;
+    public HashMap<Integer, Matrix> getLabelRep() {
+		return labelRep;
+	}
+
+	public HashMap<Integer, Matrix> getWordRep() {
+		return wordRep;
+	}
+
+	public HashMap<Integer, Matrix> getContRep() {
+		return contRep;
+	}
+
+	private HashMap<Integer, Matrix> wordRep;
+    private HashMap<Integer, Matrix> contRep;
+    private HashMap<Integer, Matrix> labelRep;
 
     public IndexMaps(HashMap<String, Integer> wordMap, HashMap<Integer, Integer> labels, String rootString,
-                     HashMap<Integer, Integer> brown4Clusters, HashMap<Integer, Integer> brown6Clusters, HashMap<String, Integer> brownFullClusters) {
+                     HashMap<Integer, Integer> brown4Clusters, HashMap<Integer, Integer> brown6Clusters, HashMap<String, Integer> brownFullClusters,
+                     HashMap<Integer, Matrix> wordRep,    HashMap<Integer, Matrix>  contRep,HashMap<Integer, Matrix> labelRep) {
         this.wordMap = wordMap;
         this.labels = labels;
-
+        this.wordRep = wordRep;
+        this.contRep = contRep;
+        this.labelRep = labelRep;
         revWords = new String[wordMap.size() + 1];
         revWords[0] = "ROOT";
 

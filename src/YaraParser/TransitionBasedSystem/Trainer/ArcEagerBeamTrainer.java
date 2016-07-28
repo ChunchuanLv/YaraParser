@@ -93,7 +93,7 @@ public class ArcEagerBeamTrainer {
             System.out.println("done\n");
 
             if (!devPath.equals("")) {
-                AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct);
+                AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct,maps);
 
                 int raSize = averagedPerceptron.raSize();
                 int effectiveRaSize = averagedPerceptron.effectiveRaSize();
@@ -106,7 +106,7 @@ public class ArcEagerBeamTrainer {
                 DecimalFormat format = new DecimalFormat("##.00");
                 System.out.println("size of RA features in memory:" + effectiveRaSize + "/" + raSize + "->" + format.format(raRatio) + "%");
                 System.out.println("size of LA features in memory:" + effectiveLaSize + "/" + laSize + "->" + format.format(laRatio) + "%");
-                KBeamArcEagerParser parser = new KBeamArcEagerParser(averagedPerceptron, dependencyRelations, featureLength, maps, options.numOfThreads);
+                KBeamArcEagerParser parser = new KBeamArcEagerParser(averagedPerceptron, dependencyRelations, featureLength, maps, options.numOfThreads,options.repPath=="",options.depMat);
 
                 parser.parseConllFile(devPath, modelPath + ".__tmp__",
                         options.rootFirst, options.beamWidth, true, lowerCased, options.numOfThreads, false, "");
@@ -129,7 +129,7 @@ public class ArcEagerBeamTrainer {
 
         Sentence sentence = goldConfiguration.getSentence();
 
-        Configuration initialConfiguration = new Configuration(goldConfiguration.getSentence(), options.rootFirst);
+        Configuration initialConfiguration = new Configuration(goldConfiguration.getSentence(), options.rootFirst,options.repPath=="",options.depMat);
         Configuration firstOracle = initialConfiguration.clone();
         ArrayList<Configuration> beam = new ArrayList<Configuration>(options.beamWidth);
         beam.add(initialConfiguration);

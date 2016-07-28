@@ -78,7 +78,9 @@ public class State implements Cloneable {
     public void push(int index) {
         stack.push(index);
     }
-
+ //dependency is the label for arc
+    //dependent word
+    //head context
     public void addArc(int dependent, int head, int dependency) {
         arcs[dependent] = new Pair<Integer, Integer>(head, dependency);
         long value = 1L << (dependency);
@@ -89,7 +91,7 @@ public class State implements Cloneable {
             if (rightMostArcs[head] == 0 || dependent > rightMostArcs[head])
                 rightMostArcs[head] = dependent;
             rightValency[head] += 1;
-            rightDepLabels[head] = rightDepLabels[head] | value;
+            rightDepLabels[head] = rightDepLabels[head] | value;  //bitwise sign for dependencys
 
         } else { //left dependency
             if (leftMostArcs[head] == 0 || dependent < leftMostArcs[head])
@@ -189,7 +191,7 @@ public class State implements Cloneable {
 
     public int getHead(int index) {
         if (arcs[index] != null)
-            return arcs[index].first;
+            return arcs[index].first;  //.second is dependency label
         return -1;
     }
 

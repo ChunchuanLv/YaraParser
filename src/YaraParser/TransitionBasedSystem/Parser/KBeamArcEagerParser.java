@@ -39,29 +39,33 @@ public class KBeamArcEagerParser extends TransitionBasedParser {
 
     int featureLength;
 
+    public boolean dep = false;
+    public boolean depMat = false;
     IndexMaps maps;
 
     ExecutorService executor;
     CompletionService<ArrayList<BeamElement>> pool;
 
-    public static KBeamArcEagerParser createParser(String modelPath,int numOfThreads) throws Exception{
+    public static KBeamArcEagerParser createParser(String modelPath,int numOfThreads,boolean dep,boolean depMat) throws Exception{
         InfStruct infStruct = new InfStruct(modelPath);
 
         ArrayList<Integer> dependencyLabels = infStruct.dependencyLabels;
         IndexMaps maps = infStruct.maps;
-        AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct);
+        AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct,maps);
 
         int featureSize = averagedPerceptron.featureSize();
-        return new KBeamArcEagerParser(averagedPerceptron, dependencyLabels, featureSize, maps, numOfThreads);
+        return new KBeamArcEagerParser(averagedPerceptron, dependencyLabels, featureSize, maps, numOfThreads,dep,depMat);
         
     }
     
     public KBeamArcEagerParser(AveragedPerceptron classifier, ArrayList<Integer> dependencyRelations,
-                               int featureLength, IndexMaps maps, int numOfThreads) {
+                               int featureLength, IndexMaps maps, int numOfThreads,boolean dep,boolean depMat) {
         this.classifier = classifier;
         this.dependencyRelations = dependencyRelations;
         this.featureLength = featureLength;
         this.maps = maps;
+        this.dep = dep;
+        this.depMat = depMat;
         executor = Executors.newFixedThreadPool(numOfThreads);
         pool = new ExecutorCompletionService<ArrayList<BeamElement>>(executor);
     }
@@ -132,7 +136,7 @@ public class KBeamArcEagerParser extends TransitionBasedParser {
     }
 
     public Configuration parse(Sentence sentence, boolean rootFirst, int beamWidth, int numOfThreads) throws Exception {
-        Configuration initialConfiguration = new Configuration(sentence, rootFirst);
+        Configuration initialConfiguration = new Configuration(sentence, rootFirst, dep, depMat);
 
         ArrayList<Configuration> beam = new ArrayList<Configuration>(beamWidth);
         beam.add(initialConfiguration);
@@ -338,8 +342,8 @@ public class KBeamArcEagerParser extends TransitionBasedParser {
         }
     }
 
-    public Configuration parsePartial(GoldConfiguration goldConfiguration, Sentence sentence, boolean rootFirst, int beamWidth, int numOfThreads) throws Exception {
-        Configuration initialConfiguration = new Configuration(sentence, rootFirst);
+    public Configuration parsePartial(GoldConfiguration goldConfiguration, Sentence sentence, boolean rootFirst, int beamWidth, int numOfThreads,boolean dep,boolean depMat) throws Exception {
+        Configuration initialConfiguration = new Configuration(sentence, rootFirst, dep, depMat);
         boolean isNonProjective = false;
         if (goldConfiguration.isNonprojective()) {
             isNonProjective = true;
@@ -415,7 +419,7 @@ public class KBeamArcEagerParser extends TransitionBasedParser {
         if (numThreads == 1)
             parseConllFileNoParallel(inputFile, outputFile, rootFirst, beamWidth, labeled, lowerCased, numThreads, partial, scorePath);
         else
-            parseConllFileParallel(inputFile, outputFile, rootFirst, beamWidth, lowerCased, numThreads, partial, scorePath);
+            parseConllFileParallel(inputFile, outputFile, rootFirst, beamWidth, lowerCased, numThreads, partial, scorePath, dep, depMat);
     }
 
     /**
@@ -452,7 +456,7 @@ public class KBeamArcEagerParser extends TransitionBasedParser {
                     System.err.print(dataCount + " ... ");
                 Configuration bestParse;
                 if (partial)
-                    bestParse = parsePartial(goldConfiguration, goldConfiguration.getSentence(), rootFirst, beamWidth, numOfThreads);
+                    bestParse = parsePartial(goldConfiguration, goldConfiguration.getSentence(), rootFirst, beamWidth, numOfThreads,this.dep, depMat);
                 else bestParse = parse(goldConfiguration.getSentence(), rootFirst, beamWidth, numOfThreads);
 
                 int[] words = goldConfiguration.getSentence().getWords();
@@ -544,7 +548,7 @@ public class KBeamArcEagerParser extends TransitionBasedParser {
         int count = 0;
         int lineNum = 0;
         while ((line = reader.readLine()) != null) {
-            pool.submit(new ParseTaggedThread(lineNum++, line, separator, rootFirst, lowerCased, maps, beamWidth, this));
+            pool.submit(new ParseTaggedThread(lineNum++, line, separator, rootFirst, lowerCased, maps, beamWidth, this, dep, depMat));
 
             if (lineNum % 1000 == 0) {
                 String[] outs = new String[lineNum];
@@ -592,7 +596,7 @@ public class KBeamArcEagerParser extends TransitionBasedParser {
         System.out.println("done!");
     }
 
-    public void parseConllFileParallel(String inputFile, String outputFile, boolean rootFirst, int beamWidth, boolean lowerCased, int numThreads, boolean partial, String scorePath) throws Exception {
+    public void parseConllFileParallel(String inputFile, String outputFile, boolean rootFirst, int beamWidth, boolean lowerCased, int numThreads, boolean partial, String scorePath,boolean depE,boolean depMat) throws Exception {
         CoNLLReader reader = new CoNLLReader(inputFile);
 
         boolean addScore = false;
@@ -619,7 +623,7 @@ public class KBeamArcEagerParser extends TransitionBasedParser {
             Configuration[] confs = new Configuration[data.size()];
 
             for (GoldConfiguration goldConfiguration : data) {
-                ParseThread thread = new ParseThread(index, classifier, dependencyRelations, featureLength, goldConfiguration.getSentence(), rootFirst, beamWidth, goldConfiguration, partial);
+                ParseThread thread = new ParseThread(index, classifier, dependencyRelations, featureLength, goldConfiguration.getSentence(), rootFirst, beamWidth, goldConfiguration, partial, depE, depMat);
                 pool.submit(thread);
                 index++;
             }
