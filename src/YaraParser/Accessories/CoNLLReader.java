@@ -54,8 +54,7 @@ private static int readWordEmbed (  HashMap<Integer, Matrix> wordRep, HashMap<St
             vector = new double[1][size];
             if (!wordMap.containsKey(word)){
             	wordMap.put(word, wordMap.size());
-            }else {
-                System.out.println("hit: "+word+" "+(hitted++));
+            }else {hitted++;
             }
             int id = wordMap.get(word);
             for (int i=0;i <size;i++)
@@ -81,8 +80,7 @@ private static int readContextEmbed (  HashMap<Integer, Matrix> wordRep, HashMap
             vector = new double[1][size];
             if (!wordMap.containsKey(word)) {
             	wordMap.put(word, wordMap.size());
-            }else {
-                System.out.println("hitc: "+word+" "+(hittedC++));
+            }else {hittedC++;
             }
             int id = wordMap.get(word);
             for (int i=0;i <size;i++)
