@@ -296,7 +296,6 @@ public class AveragedPerceptron {
 	//	System.out.println(wordRep.get(head));
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)) return 0;
 		float result = (float) wordRep.get(word).times(contRep.get(head)).get(0, 0);
-		System.out.println(result);
 		return result ;
 	}
 
