@@ -49,10 +49,10 @@ private static int readWordEmbed (  HashMap<Integer, Matrix> wordRep, HashMap<St
         String[] spl = line.split("[\t ]");
         if (spl.length >0) {
             String word = spl[0];
-            if ( CoNLLReader.lowercased) word.toLowerCase();
             size = spl.length-1;
             vector = new double[1][size];
             if (!wordMap.containsKey(word)){
+                if ( CoNLLReader.lowercased) word.toLowerCase();
             	wordMap.put(word, wordMap.size());
             }else {hitted++;
             }
@@ -75,10 +75,10 @@ private static int readContextEmbed (  HashMap<Integer, Matrix> wordRep, HashMap
         String[] spl = line.split("[\t ]");
         if (spl.length >0) {
             String word = spl[0];
-            if ( CoNLLReader.lowercased) word.toLowerCase();
             size = spl.length-1;
             vector = new double[1][size];
             if (!wordMap.containsKey(word)) {
+                if ( CoNLLReader.lowercased) word.toLowerCase();
             	wordMap.put(word, wordMap.size());
             }else {hittedC++;
             }
