@@ -23,8 +23,6 @@ import Jama.Matrix;
 public class YaraParser {
     public static void main(String[] args) throws Exception {
         Options options = Options.processArgs(args);
-        Object t = (double) 1.5;
-        System.out.println(t instanceof Double);
         if (options.showHelp) {
             Options.showHelp();
         } else {

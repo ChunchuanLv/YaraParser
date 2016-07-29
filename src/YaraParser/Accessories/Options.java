@@ -204,9 +204,9 @@ public class Options implements Serializable {
             else if (args[i].startsWith("pt:"))
                 options.partialTrainingStartingIteration = Integer.parseInt(args[i].substring(args[i].lastIndexOf(":") + 1));
             else if (args[i].equals("unlabeled"))
-                options.labeled = Boolean.parseBoolean(args[i]);
+                options.labeled = false;
             else if (args[i].equals("lowercase"))
-                options.lowercase = Boolean.parseBoolean(args[i]);
+                options.lowercase = true;
             else if (args[i].startsWith("-score"))
                 options.scorePath = args[i + 1];
             else if (args[i].equals("basic"))
