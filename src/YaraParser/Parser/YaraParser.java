@@ -22,23 +22,6 @@ import Jama.Matrix;
 
 public class YaraParser {
     public static void main(String[] args) throws Exception {
-    	double[][] mat = {{1,3,4},{2,4,5}};
-    	double[][] e1 = {{3,2}};
-    	double[][] e2 = {{3},{4},{6}};
-    	Matrix matM = new Matrix(mat);
-    	Matrix M1 = new Matrix(e1);
-    	Matrix M2 = new Matrix(e2);
-    	String s = "  \t  fsf\t ewe sfa";
-    	String[] sv = s.split("[\t ]");
-    	for (int i=0;i<sv.length;i++)
-    		System.out.println(sv[i]);
-        int k = 0;
-        long value = 1L << (15);
-        System.out.println(1.5/2);
-        ArrayList<Integer> test = new  ArrayList<Integer>();
-        test.add(++k);
-        test.add(k++);
-        for (int i=0;i< test.size();i++) System.out.println(test.get(i));
         Options options = Options.processArgs(args);
         Object t = (double) 1.5;
         System.out.println(t instanceof Double);

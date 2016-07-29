@@ -269,6 +269,7 @@ public class AveragedPerceptron {
 			}
 		}
 		if (dep) {
+			if (features[1]==null||features[3]==null) return scores;
 			int head = (int) (long)features[3] - 2;
 			int word = (int)(long) features[1] - 2;
 			CompactArray values = map[depIndex].get(features[depIndex]);
@@ -325,6 +326,7 @@ public class AveragedPerceptron {
 		}
 
 		if (dep) {
+			if (features[1]==null||features[3]==null) return scores;
 			int head =  (int) (long)features[1] - 2;
 			int word =(int) (long)features[3] - 2; 
 			CompactArray values = map[depIndex].get(features[depIndex]);
