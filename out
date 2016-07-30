@@ -1,0 +1,60 @@
+Script started on Fri 29 Jul 2016 01:29:46 BST
+]0;chunchuan@chunchuan-N56JR: ~/YaraParserchunchuan@chunchuan-N56JR:~/YaraParser$ exit[2Pthitorch notebookth[Kitorch notebook[6Pcd thesis[5Pexitcd thesisitorch notebookth[Kexit[Kexit[2Pthitorch notebookth[Kexit[Kbash train.sh
+true
+train file: ../data/train.dep
+dev file: ../data/dev.dep
+cluster file: 
+beam width: 64
+rootFirst: false
+labeled: true
+lower-case: false
+extended features: true
+extended with brown cluster features: false
+updateModel: max violation
+oracle: dynamic
+oracle selection: latent max
+training-iterations: 10
+number of threads: 16
+partial training starting iteration: 3
+repPath: ../data
+depMat: false
+
+^C]0;chunchuan@chunchuan-N56JR: ~/YaraParserchunchuan@chunchuan-N56JR:~/YaraParser$ head -n 10 out
+]0;chunchuan@chunchuan-N56JR: ~/YaraParserchunchuan@chunchuan-N56JR:~/YaraParser$ head -n 10 out
+]0;chunchuan@chunchuan-N56JR: ~/YaraParserchunchuan@chunchuan-N56JR:~/YaraParser$ git add *
+]0;chunchuan@chunchuan-N56JR: ~/YaraParserchunchuan@chunchuan-N56JR:~/YaraParser$ git commit -m ""t"e"s"t"
+[master 5fbd443] test
+ 14 files changed, 154 insertions(+), 21 deletions(-)
+ rewrite no_train.sh~ (83%)
+ create mode 100644 src/UnitTest/MyTest.java
+ rewrite src/YaraParser/TransitionBasedSystem/Trainer/ArcEagerBeamTrainer.class (67%)
+ create mode 100644 unitTest.sh
+ create mode 100644 unitTest.sh~
+]0;chunchuan@chunchuan-N56JR: ~/YaraParserchunchuan@chunchuan-N56JR:~/YaraParser$ git pushh[K
+warning: push.default is unset; its implicit value has changed in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the traditional behaviour, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behaviour now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+Since Git 2.0, Git defaults to the more conservative 'simple'
+behaviour, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': chunchuanlv
+Password for 'https://chunchuanlv@github.com': 
+Counting objects: 22, done.
+Delta compression using up to 8 threads.
+Compressing objects:   4% (1/21)   Compressing objects:   9% (2/21)   Compressing objects:  14% (3/21)   Compressing objects:  19% (4/21)   Compressing objects:  23% (5/21)   Compressing objects:  28% (6/21)   Compressing objects:  33% (7/21)   Compressing objects:  38% (8/21)   Compressing objects:  42% (9/21)   Compressing objects:  47% (10/21)   Compressing objects:  52% (11/21)   Compressing objects:  57% (12/21)   Compressing objects:  61% (13/21)   Compressing objects:  66% (14/21)   Compressing objects:  71% (15/21)   Compressing objects:  76% (16/21)   Compressing objects:  80% (17/21)   Compressing objects:  85% (18/21)   Compressing objects:  90% (19/21)   Compressing objects:  95% (20/21)   Compressing objects: 100% (21/21)   Compressing objects: 100% (21/21), done.
+Writing objects:   4% (1/22)   Writing objects:   9% (2/22)   Writing objects:  18% (4/22)   Writing objects:  22% (5/22)   Writing objects:  27% (6/22)   Writing objects:  31% (7/22)   Writing objects:  40% (9/22)   Writing objects:  45% (10/22)   Writing objects:  50% (11/22)   Writing objects:  54% (12/22)   Writing objects:  59% (13/22)   Writing objects:  63% (14/22)   Writing objects:  68% (15/22)   Writing objects:  72% (16/22)   Writing objects:  77% (17/22)   Writing objects:  81% (18/22)   Writing objects:  86% (19/22)   Writing objects:  90% 
