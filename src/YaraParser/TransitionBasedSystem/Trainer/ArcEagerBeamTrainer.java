@@ -67,7 +67,7 @@ public class ArcEagerBeamTrainer {
         ExecutorService executor = Executors.newFixedThreadPool(options.numOfThreads);
         CompletionService<ArrayList<BeamElement>> pool = new ExecutorCompletionService<ArrayList<BeamElement>>(executor);
 
-
+        double accuracyOndev = 0;
         for (int i = 1; i <= maxIteration; i++) {
             long start = System.currentTimeMillis();
 
@@ -110,7 +110,11 @@ public class ArcEagerBeamTrainer {
 
                 parser.parseConllFile(devPath, modelPath + ".__tmp__",
                         options.rootFirst, options.beamWidth, true, lowerCased, options.numOfThreads, false, "");
-                Evaluator.evaluate(devPath, modelPath + ".__tmp__", punctuations);
+               double accuracy= Evaluator.evaluate(devPath, modelPath + ".__tmp__", punctuations);
+               if (accuracy >accuracyOndev) {
+            	   accuracyOndev = accuracy;
+                   infStruct.saveModel(modelPath + "_best" );
+               }
                 parser.shutDownLiveThreads();
             }
         }

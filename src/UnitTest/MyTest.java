@@ -11,7 +11,11 @@ import YaraParser.Accessories.Pair;
 import YaraParser.Learning.AveragedPerceptron;
 import YaraParser.Structures.IndexMaps;
 import YaraParser.Structures.Sentence;
+import YaraParser.TransitionBasedSystem.Configuration.Configuration;
 import YaraParser.TransitionBasedSystem.Configuration.GoldConfiguration;
+import YaraParser.TransitionBasedSystem.Configuration.State;
+import YaraParser.TransitionBasedSystem.Features.FeatureExtractor;
+import YaraParser.TransitionBasedSystem.Parser.ArcEager;
 import YaraParser.TransitionBasedSystem.Trainer.ArcEagerBeamTrainer;
 
 import java.io.FileOutputStream;
@@ -20,9 +24,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 
-public class UnitTest {
+public class MyTest {
 
     public static void main(String[] args) throws Exception {
         Options options = new Options();
@@ -34,7 +39,6 @@ public class UnitTest {
         options.trainingIter = 3;
         options.train = true;
         options.beamWidth = 4;
-        options.rootFirst = true;
         options.useDynamicOracle = false;
         options.labeled = true;
         options.useMaxViol = false;
@@ -61,25 +65,6 @@ public class UnitTest {
         for (int lab : maps.getLabels().keySet())
             dependencyLabels.add(lab);
 
-        HashMap<Integer, HashMap<Integer, HashSet<Integer>>> headDepSet = new HashMap<Integer, HashMap<Integer, HashSet<Integer>>>();
-
-        for (GoldConfiguration configuration : dataSet) {
-            Sentence sentence = configuration.getSentence();
-
-            for (int dep : configuration.getGoldDependencies().keySet()) {
-                Pair<Integer, Integer> headDepPair = configuration.getGoldDependencies().get(dep);
-                int relation = headDepPair.second;
-                int dependent = sentence.posAt(dep);
-                int head = sentence.posAt(headDepPair.first);
-
-                if (!headDepSet.containsKey(head))
-                    headDepSet.put(head, new HashMap<Integer, HashSet<Integer>>());
-                if (!headDepSet.get(head).containsKey(dependent))
-                    headDepSet.get(head).put(dependent, new HashSet<Integer>());
-                headDepSet.get(head).get(dependent).add(relation);
-            }
-        }
-
         int featureLength = options.useExtendedFeatures ? 72 : 26;
         if (options.useExtendedWithBrownClusterFeatures || maps.hasClusters())
             featureLength = 153;
@@ -104,18 +89,32 @@ public class UnitTest {
 
         System.out.print("writing objects....");
 
-        ObjectOutput writer = new ObjectOutputStream(new FileOutputStream(options.modelFile));
-        writer.writeObject(dependencyLabels);
-        writer.writeObject(maps);
-        writer.writeObject(headDepSet);
-        writer.writeObject(options);
-        writer.flush();
-        writer.close();
-        System.out.println("done!");
-
-        ArcEagerBeamTrainer trainer = new ArcEagerBeamTrainer(options.useMaxViol ? "max_violation" : "early", new AveragedPerceptron(featureLength, dependencyLabels.size(),maps),
-                options, dependencyLabels, featureLength, maps);
-        trainer.train(dataSet, options.devPath, options.trainingIter, options.modelFile, options.lowercase, options.punctuations, options.partialTrainingStartingIteration);
-        trainer = null;
+        AveragedPerceptron per= new AveragedPerceptron(featureLength, dependencyLabels.size(),maps);
+   
+        
+        Sentence sentence = dataSet.get(0).getSentence();
+        Configuration configuration =new Configuration(sentence, options.rootFirst, true, false);
+        State currentState = configuration.state;
+        ArcEager.shift(currentState);
+        int stack = currentState.peek();
+        int stackWordId = sentence.getWords()[stack];
+        Object[] features = FeatureExtractor.extractAllParseFeatures(configuration, featureLength);
+		int bufferF = (int) (long)features[3] - 2;
+		int stackF = (int)(long) features[1] - 2;
+		System.out.println(stackF);
+		System.out.println(stackWordId);
+   //     String stackWord = getWord(stackWordId,maps.getWordMap());
+        
     }
+
+	private static String getWord(int stackWordId, HashMap<String, Integer> wordMap) {
+		Iterator it = wordMap.entrySet().iterator();
+	    while (it.hasNext()) {
+	    	HashMap.Entry pair = (HashMap.Entry)it.next();
+	        System.out.println(pair.getKey() + " = " + pair.getValue());
+	        if ((int)pair.getValue()==stackWordId ) return (String)pair.getKey();
+	        it.remove(); // avoids a ConcurrentModificationException
+	    }
+		return null;
+	}
 }
