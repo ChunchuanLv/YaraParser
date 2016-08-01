@@ -98,7 +98,6 @@ public class AveragedPerceptron {
 			leftArcFeatureAveragedWeights[i] = new HashMap<Object, CompactArray>();
 			rightArcFeatureAveragedWeights[i] = new HashMap<Object, CompactArray>();
 		}
-		dep = (featSize == 27) || (featSize == 73) || (featSize == 154);
 		iteration = 1;
 		this.dependencySize = dependencySize;
 	}
@@ -122,6 +121,8 @@ public class AveragedPerceptron {
 		wordRep = maps.getWordRep();
 		contRep = maps.getContRep();
 		labelRep =maps.getLabelRep();
+		depMat = labelRep == null ||labelRep.size() >0;
+		dep = (featSize == 27) || (featSize == 73) || (featSize == 154);
 	}
 
 	private HashMap<Integer, Matrix> wordRep;
@@ -141,6 +142,7 @@ public class AveragedPerceptron {
 		wordRep = maps.getWordRep();
 		contRep = maps.getContRep();
 		labelRep =maps.getLabelRep();
+		depMat = labelRep == null ||labelRep.size() >0;
 	}
 
 	public float changeWeight(Actions actionType, int slotNum, Object featureName, int labelIndex, float change) {
@@ -176,6 +178,20 @@ public class AveragedPerceptron {
 					labelIndex, change, dependencySize);
 		}
 
+		return change;
+	}
+
+	public float changeWeight(Actions actionType, int slotNum, Object featureName, int labelIndex, float change,Object[] features) {
+		if (!dep || slotNum!=depIndex) return changeWeight(actionType,slotNum,featureName,labelIndex,change); 
+		if (actionType == Actions.RightArc) {
+			if (getVecCost(features,rightArcFeatureWeights,false,labelIndex)<0) change = -change;
+			changeFeatureWeight(rightArcFeatureWeights[slotNum], rightArcFeatureAveragedWeights[slotNum], featureName,
+					labelIndex, change, dependencySize);
+		} else if (actionType == Actions.LeftArc) {
+			if (getVecCost(features,leftArcFeatureWeights,true,labelIndex)<0) change = -change;
+			changeFeatureWeight(leftArcFeatureWeights[slotNum], leftArcFeatureAveragedWeights[slotNum], featureName,
+					labelIndex, change, dependencySize);
+		}
 		return change;
 	}
 
@@ -215,11 +231,9 @@ public class AveragedPerceptron {
 	}
 
 	public float shiftScore(final Object[] features, boolean decode) {
-		setDep(features);
 		float score = 0.0f;
 
 		HashMap<Object, Float>[] map = decode ? shiftFeatureAveragedWeights : shiftFeatureWeights;
-
 		for (int i = 0; i < features.length; i++) {
 			if (features[i] == null || (i >= 26 && i < 32))
 				continue;
@@ -233,7 +247,6 @@ public class AveragedPerceptron {
 	}
 
 	public float reduceScore(final Object[] features, boolean decode) {
-		setDep(features);
 		float score = 0.0f;
 
 		HashMap<Object, Float>[] map = decode ? reduceFeatureAveragedWeights : reduceFeatureWeights;
@@ -250,7 +263,6 @@ public class AveragedPerceptron {
 	}
 
 	public float[] leftArcScores(final Object[] features, boolean decode) {
-		setDep(features);
 		float scores[] = new float[dependencySize];
 
 		HashMap<Object, CompactArray>[] map = decode ? leftArcFeatureAveragedWeights : leftArcFeatureWeights;
@@ -269,27 +281,74 @@ public class AveragedPerceptron {
 			}
 		}
 		if (dep) {
-			if (features[1]==null||features[4]==null) return scores;
-			int head = (int) (long)features[4] - 2;
-			int word = (int)(long) features[1] - 2;
-			CompactArray values = map[depIndex].get(features[depIndex]);
-			if (values != null) {
-				int offset = values.getOffset();
-				float[] weightVector = values.getArray();
-				if (depMat)
-					for (int d = offset; d < offset + weightVector.length; d++)
-						scores[d] += weightVector[d - offset] * getCostDep(word, head, d);
-				else {
-					float cost = getCost(word, head);
-					for (int d = offset; d < offset + weightVector.length; d++)
-						scores[d] += weightVector[d - offset] * cost;
-				}
-			}
+			float[] addScore = getVecCost(features,map,true);
+			for (int i=0; i<addScore.length;i++) scores[i] += addScore[i];
 		}
 
 		return scores;
 	}
+public float[] getVecCost(final Object[] features,HashMap<Object, CompactArray>[]  map,boolean left) {
+	float scores[] = new float[dependencySize];
+	if (dep) {
+		if (features[1]==null||features[4]==null) return scores;
+		int head;
+		int word;
+		if (left) {
+		head = (int) (long)features[4] - 2;
+	 word = (int)(long) features[1] - 2;
+		}else
+		{
+			head =  (int) (long)features[1] - 2;
+			word =(int) (long)features[4] - 2; 
+		}
+		CompactArray values = map[depIndex].get(features[depIndex]);
+		if (values != null) {
+			int offset = values.getOffset();
+			float[] weightVector = values.getArray();
+			if (depMat)
+				for (int d = offset; d < offset + weightVector.length; d++)
+					scores[d] = weightVector[d - offset] * getCostDep(word, head, d);
+			else {
+				float cost = getCost(word, head);
+				for (int d = offset; d < offset + weightVector.length; d++)
+					scores[d] = weightVector[d - offset] * cost;
+			}
+		}
+	}
+	
+	return scores;
+}
 
+
+public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[]  map,boolean left,int d) {
+	float scores = 0;
+	if (dep) {
+		if (features[1]==null||features[4]==null) return scores;
+		int head;
+		int word;
+		if (left) {
+		head = (int) (long)features[4] - 2;
+	 word = (int)(long) features[1] - 2;
+		}else
+		{
+			head =  (int) (long)features[1] - 2;
+			word =(int) (long)features[4] - 2; 
+		}
+		CompactArray values = map[depIndex].get(features[depIndex]);
+		if (values != null) {
+			int offset = values.getOffset();
+			float[] weightVector = values.getArray();
+			if (depMat)
+					scores= weightVector[d - offset] * getCostDep(word, head, d);
+			else {
+				float cost = getCost(word, head);
+					scores = weightVector[d - offset] * cost;
+			}
+		}
+	}
+	
+	return scores;
+}
 	private float getCost(int word, int head) {
 
 	//	System.out.println(word);
@@ -306,7 +365,6 @@ public class AveragedPerceptron {
 	}
 
 	public float[] rightArcScores(final Object[] features, boolean decode) {
-		setDep(features);
 		float scores[] = new float[dependencySize];
 
 		HashMap<Object, CompactArray>[] map = decode ? rightArcFeatureAveragedWeights : rightArcFeatureWeights;
@@ -326,22 +384,8 @@ public class AveragedPerceptron {
 		}
 
 		if (dep) {
-			if (features[1]==null||features[4]==null) return scores;
-			int head =  (int) (long)features[1] - 2;
-			int word =(int) (long)features[4] - 2; 
-			CompactArray values = map[depIndex].get(features[depIndex]);
-			if (values != null) {
-				int offset = values.getOffset();
-				float[] weightVector = values.getArray();
-				if (depMat)
-					for (int d = offset; d < offset + weightVector.length; d++) 
-						scores[d] += weightVector[d - offset] * getCostDep(word, head, d);
-				else {
-					float cost = getCost(word, head);
-					for (int d = offset; d < offset + weightVector.length; d++)
-						scores[d] += weightVector[d - offset] * cost;
-				}
-			}
+			float[] addScore = getVecCost(features,map,false);
+			for (int i=0; i<addScore.length;i++) scores[i] += addScore[i];
 		}
 		return scores;
 	}

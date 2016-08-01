@@ -9,6 +9,7 @@ import YaraParser.Accessories.Evaluator;
 import YaraParser.Accessories.Options;
 import YaraParser.Accessories.Pair;
 import YaraParser.Learning.AveragedPerceptron;
+import YaraParser.Structures.CompactArray;
 import YaraParser.Structures.IndexMaps;
 import YaraParser.Structures.InfStruct;
 import YaraParser.Structures.Sentence;
@@ -29,6 +30,8 @@ import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import Jama.Matrix;
+
 public class ArcEagerBeamTrainer {
     Options options;
     /**
@@ -40,13 +43,18 @@ public class ArcEagerBeamTrainer {
      */
     private String updateMode;
     private AveragedPerceptron classifier;
-   
+
+	private HashMap<Integer, Matrix> wordRep;
+    private HashMap<Integer, Matrix> contRep;
+    private HashMap<Integer, Matrix> labelRep;
     private ArrayList<Integer> dependencyRelations;
     private int featureLength;
-
     private Random randGen;
     private IndexMaps maps;
 
+	public boolean dep;
+	public boolean depMat;
+	public int depIndex;
     public ArcEagerBeamTrainer(String updateMode, AveragedPerceptron classifier, Options options,
                                ArrayList<Integer> dependencyRelations,
                                int featureLength
@@ -58,6 +66,11 @@ public class ArcEagerBeamTrainer {
         this.featureLength = featureLength;
         randGen = new Random();
         this.maps = maps;
+		wordRep = maps.getWordRep();
+		contRep = maps.getContRep();
+		labelRep =maps.getLabelRep();
+		dep = (featureLength == 27) || (featureLength == 73) || (featureLength == 154);
+		depMat = labelRep == null ||labelRep.size() >0;
     }
 
     public void train(ArrayList<GoldConfiguration> trainData, String devPath, int maxIteration, String modelPath, boolean lowerCased, HashSet<String> punctuations, int partialTreeIter) throws Exception {
@@ -536,10 +549,20 @@ public class ArcEagerBeamTrainer {
                     Pair<Integer, Object> featName = new Pair<Integer, Object>(action, feats[f]);
                     HashMap<Pair<Integer, Object>, Float> map = (HashMap<Pair<Integer, Object>, Float>) oracleFeatures[f];
                     Float value = map.get(featName);
-                    if (value == null)
-                        map.put(featName, 1.0f);
+                    float change = 1.0f;
+                    if (dep&&f==depIndex) {
+                    	if (action >= (3 + dependencyRelations.size())) {
+                    		 int  dependency = action - (3 + dependencyRelations.size());
+                        	change = classifier.getVecCost(feats,classifier.leftArcFeatureWeights,true, dependency) ;
+                        } else if (action >= 3) {
+                        	 int   dependency = action - 3;
+                        	change = classifier.getVecCost(feats,classifier.rightArcFeatureWeights,false, dependency) ;
+                        }
+                    }
+        		     if (value == null)
+                        map.put(featName, change);
                     else
-                        map.put(featName, value + 1);
+                        map.put(featName, value + change);
                 }
             }
 
@@ -576,10 +599,21 @@ public class ArcEagerBeamTrainer {
                         Pair<Integer, Object> featName = new Pair<Integer, Object>(action, feats[f]);
                         HashMap<Pair<Integer, Object>, Float> map = (HashMap<Pair<Integer, Object>, Float>) predictedFeatures[f];
                         Float value = map.get(featName);
-                        if (value == null)
-                            map.put(featName, 1.f);
+
+                        float change = 1.0f;
+                        if (dep&&f==depIndex) {
+                        	if (action >= (3 + dependencyRelations.size())) {
+                        		 int  dependency = action - (3 + dependencyRelations.size());
+                            	change = classifier.getVecCost(feats,classifier.leftArcFeatureWeights,true, dependency) ;
+                            } else if (action >= 3) {
+                            	 int   dependency = action - 3;
+                            	change = classifier.getVecCost(feats,classifier.rightArcFeatureWeights,false, dependency) ;
+                            }
+                        }
+            		     if (value == null)
+                            map.put(featName, change);
                         else
-                            map.put(featName, map.get(featName) + 1);
+                            map.put(featName, value + change);
                     }
             }
 
@@ -645,8 +679,9 @@ public class ArcEagerBeamTrainer {
                 }
                 if (feat.second != null) {
                     Object feature = feat.second;
-                    if (!(map.containsKey(feat) && map.get(feat).equals(map2.get(feat))))
+                    if (!(map.containsKey(feat) && map.get(feat).equals(map2.get(feat)))) {
                         classifier.changeWeight(actionType, f, feature, dependency, map2.get(feat));
+                    }
                 }
             }
         }
