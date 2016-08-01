@@ -57,4 +57,592 @@ Password for 'https://chunchuanlv@github.com':
 Counting objects: 22, done.
 Delta compression using up to 8 threads.
 Compressing objects:   4% (1/21)   Compressing objects:   9% (2/21)   Compressing objects:  14% (3/21)   Compressing objects:  19% (4/21)   Compressing objects:  23% (5/21)   Compressing objects:  28% (6/21)   Compressing objects:  33% (7/21)   Compressing objects:  38% (8/21)   Compressing objects:  42% (9/21)   Compressing objects:  47% (10/21)   Compressing objects:  52% (11/21)   Compressing objects:  57% (12/21)   Compressing objects:  61% (13/21)   Compressing objects:  66% (14/21)   Compressing objects:  71% (15/21)   Compressing objects:  76% (16/21)   Compressing objects:  80% (17/21)   Compressing objects:  85% (18/21)   Compressing objects:  90% (19/21)   Compressing objects:  95% (20/21)   Compressing objects: 100% (21/21)   Compressing objects: 100% (21/21), done.
-Writing objects:   4% (1/22)   Writing objects:   9% (2/22)   Writing objects:  18% (4/22)   Writing objects:  22% (5/22)   Writing objects:  27% (6/22)   Writing objects:  31% (7/22)   Writing objects:  40% (9/22)   Writing objects:  45% (10/22)   Writing objects:  50% (11/22)   Writing objects:  54% (12/22)   Writing objects:  59% (13/22)   Writing objects:  63% (14/22)   Writing objects:  68% (15/22)   Writing objects:  72% (16/22)   Writing objects:  77% (17/22)   Writing objects:  81% (18/22)   Writing objects:  86% (19/22)   Writing objects:  90% 
+Writing objects:   4% (1/22)   Writing objects:   9% (2/22)   Writing objects:  18% (4/22)   Writing objects:  22% (5/22)   Writing objects:  27% (6/22)   Writing objects:  31% (7/22)   Writing objects:  40% (9/22)   Writing objects:  45% (10/22)   Writing objects:  50% (11/22)   Writing objects:  54% (12/22)   Writing objects:  59% (13/22)   Writing objects:  63% (14/22)   Writing objects:  68% (15/22)   Writing objects:  72% (16/22)   Writing objects:  77% (17/22)   Writing objects:  81% (18/22)   Writing objects:  86% (19/22)   Writing objects:  90% (20/22)   Writing objects:  95% (21/22)   Writing objects: 100% (22/22)   Writing objects: 100% (22/22), 12.98 KiB | 0 bytes/s, done.
+Total 22 (delta 14), reused 0 (delta 0)
+To https://github.com/ChunchuanLv/YaraParser
+   6e9a2c0..5fbd443  master -> master
+]0;chunchuan@chunchuan-N56JR: ~/YaraParserchunchuan@chunchuan-N56JR:~/YaraParser$ git add *
+]0;chunchuan@chunchuan-N56JR: ~/YaraParserchunchuan@chunchuan-N56JR:~/YaraParser$ git commit -m ""y"[1P"j"a"r"/"
+[master 24c3075] jar/
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rewrite train.sh (60%)
+]0;chunchuan@chunchuan-N56JR: ~/YaraParserchunchuan@chunchuan-N56JR:~/YaraParser$ git push
+warning: push.default is unset; its implicit value has changed in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the traditional behaviour, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behaviour now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+Since Git 2.0, Git defaults to the more conservative 'simple'
+behaviour, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': chunchuanlv
+Password for 'https://chunchuanlv@github.com': 
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects:  33% (1/3)   Compressing objects:  66% (2/3)   Compressing objects: 100% (3/3)   Compressing objects: 100% (3/3), done.
+Writing objects:  33% (1/3)   Writing objects:  66% (2/3)   Writing objects: 100% (3/3)   Writing objects: 100% (3/3), 293 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+To https://github.com/ChunchuanLv/YaraParser
+   c90e4de..24c3075  master -> master
+]0;chunchuan@chunchuan-N56JR: ~/YaraParserchunchuan@chunchuan-N56JR:~/YaraParser$ cd
+]0;chunchuan@chunchuan-N56JR: ~chunchuan@chunchuan-N56JR:~$ cd thesis
+]0;chunchuan@chunchuan-N56JR: ~/thesischunchuan@chunchuan-N56JR:~/thesis$ git add *
+]0;chunchuan@chunchuan-N56JR: ~/thesischunchuan@chunchuan-N56JR:~/thesis$ git commit -,[Km ""n"e"w"?"
+[master cd0a387] new?
+ 5 files changed, 169 insertions(+), 123 deletions(-)
+ create mode 100644 outputF.lua
+]0;chunchuan@chunchuan-N56JR: ~/thesischunchuan@chunchuan-N56JR:~/thesis$ ss[K[Kgit commit -m "new?"add *[Kcd thesis[K thesisgit add *commit -m "new?"[Kssh s1544871@schiff.inf.ed.ac.uk
+s1544871@schiff.inf.ed.ac.uk's password: 
+Last login: Sat Jul 30 11:37:47 2016 from 82-68-58-158.dsl.in-addr.zen.co.uk
+This is student.ssh.inf.ed.ac.uk running Scientific Linux 6 (sl6) DICE.
+It is just a gateway from the internet to our systems, so please now
+'ssh student.login' before doing anything else, and remember to run
+any heavy/demanding programs on the compute server student.compute
+]2;s1544871 @ schiff:/afs/inf.ed.ac.uk/user/s15/s1544871]1;schiff[?1034h[schiff]s1544871: ss[K[Kexitssh  porthemmet
+Last login: Sat Jul 30 11:38:01 2016 from schiff.inf.ed.ac.uk
+]2;s1544871 @ porthemmet:/home/s1544871]1;porthemmet[?1034h[porthemmet]s1544871: cd YaraParser/
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: ls
+[0m[01;34mjar[0m           [01;34mMETA-INF[0m      no_train.sh.e14593  [01;34msample_data[0m  train.sh~        unitTest.sh
+license       no_test.sh    no_train.sh.o14593  [01;34msrc[0m          train.sh.e14592  unitTest.sh~
+LICENSE.md    no_test.sh~   out                 test.sh      train.sh.e14594
+mattrain.sh   no_train.sh   [01;34mpunc_files[0m          test.sh~     train.sh.o14592
+mattrain.sh~  no_train.sh~  README.md           train.sh     train.sh.o14594
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: cat not[K_train.sh.e
+cat: no_train.sh.e: No such file or directory
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: cat no_train.sh.e14593 
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.38 ms for each arc!
+8.91 ms for each sentence!
+
+Labeled accuracy: 90.03
+Unlabeled accuracy:  93.27
+Labeled exact match:  29.53
+Unlabeled exact match:  44.65 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.40 ms for each arc!
+9.48 ms for each sentence!
+
+Labeled accuracy: 90.87
+Unlabeled accuracy:  93.90
+Labeled exact match:  32.53
+Unlabeled exact match:  48.18 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.38 ms for each arc!
+9.07 ms for each sentence!
+
+Labeled accuracy: 91.30
+Unlabeled accuracy:  94.25
+Labeled exact match:  34.71
+Unlabeled exact match:  50.18 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.34 ms for each arc!
+8.14 ms for each sentence!
+
+Labeled accuracy: 91.46
+Unlabeled accuracy:  94.31
+Labeled exact match:  34.59
+Unlabeled exact match:  50.94 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.40 ms for each arc!
+9.37 ms for each sentence!
+
+Labeled accuracy: 91.51
+Unlabeled accuracy:  94.38
+Labeled exact match:  35.00
+Unlabeled exact match:  51.53 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.33 ms for each arc!
+7.77 ms for each sentence!
+
+Labeled accuracy: 91.58
+Unlabeled accuracy:  94.40
+Labeled exact match:  35.12
+Unlabeled exact match:  51.41 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.34 ms for each arc!
+8.12 ms for each sentence!
+
+Labeled accuracy: 91.69
+Unlabeled accuracy:  94.50
+Labeled exact match:  35.35
+Unlabeled exact match:  51.76 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.37 ms for each arc!
+8.73 ms for each sentence!
+
+Labeled accuracy: 91.78
+Unlabeled accuracy:  94.59
+Labeled exact match:  35.41
+Unlabeled exact match:  51.76 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.40 ms for each arc!
+9.40 ms for each sentence!
+
+Labeled accuracy: 91.78
+Unlabeled accuracy:  94.60
+Labeled exact match:  35.18
+Unlabeled exact match:  52.00 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.37 ms for each arc!
+8.74 ms for each sentence!
+
+Labeled accuracy: 91.80
+Unlabeled accuracy:  94.62
+Labeled exact match:  35.00
+Unlabeled exact match:  51.94 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 1800 ... 1900 ... 2000 ... 2100 ... 2200 ... 2300 ... 2400 ... 
+.10 ms for each arc!
+2.43 ms for each sentence!
+
+Labeled accuracy: 98.69
+Unlabeled accuracy:  98.95
+Labeled exact match:  91.80
+Unlabeled exact match:  91.80 
+
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: cat no_train.sh.e14593 [C[C[C[C[C[C[C[C[C[1P[1P[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K459
+cat: train.sh.e1459: No such file or directory
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: cat train.sh.e1459[K[K[K[K1459[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kls
+[0m[01;34mjar[0m           [01;34mMETA-INF[0m      no_train.sh.e14593  [01;34msample_data[0m  train.sh~        unitTest.sh
+license       no_test.sh    no_train.sh.o14593  [01;34msrc[0m          train.sh.e14592  unitTest.sh~
+LICENSE.md    no_test.sh~   out                 test.sh      train.sh.e14594
+mattrain.sh   no_train.sh   [01;34mpunc_files[0m          test.sh~     train.sh.o14592
+mattrain.sh~  no_train.sh~  README.md           train.sh     train.sh.o14594
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: lscat train.sh.e14594
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.36 ms for each arc!
+8.52 ms for each sentence!
+
+Labeled accuracy: 89.76
+Unlabeled accuracy:  93.07
+Labeled exact match:  30.06
+Unlabeled exact match:  45.53 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.33 ms for each arc!
+7.76 ms for each sentence!
+
+Labeled accuracy: 90.94
+Unlabeled accuracy:  93.98
+Labeled exact match:  33.59
+Unlabeled exact match:  49.00 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.32 ms for each arc!
+7.60 ms for each sentence!
+
+Labeled accuracy: 91.17
+Unlabeled accuracy:  94.19
+Labeled exact match:  33.94
+Unlabeled exact match:  50.06 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.34 ms for each arc!
+7.94 ms for each sentence!
+
+Labeled accuracy: 91.33
+Unlabeled accuracy:  94.30
+Labeled exact match:  34.65
+Unlabeled exact match:  50.41 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.36 ms for each arc!
+8.57 ms for each sentence!
+
+Labeled accuracy: 91.48
+Unlabeled accuracy:  94.38
+Labeled exact match:  35.06
+Unlabeled exact match:  51.24 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.38 ms for each arc!
+8.92 ms for each sentence!
+
+Labeled accuracy: 91.55
+Unlabeled accuracy:  94.44
+Labeled exact match:  35.41
+Unlabeled exact match:  51.24 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.36 ms for each arc!
+8.47 ms for each sentence!
+
+Labeled accuracy: 91.55
+Unlabeled accuracy:  94.45
+Labeled exact match:  35.06
+Unlabeled exact match:  51.29 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.37 ms for each arc!
+8.69 ms for each sentence!
+
+Labeled accuracy: 91.60
+Unlabeled accuracy:  94.48
+Labeled exact match:  35.41
+Unlabeled exact match:  51.88 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.37 ms for each arc!
+8.80 ms for each sentence!
+
+Labeled accuracy: 91.66
+Unlabeled accuracy:  94.48
+Labeled exact match:  35.29
+Unlabeled exact match:  51.65 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.39 ms for each arc!
+9.11 ms for each sentence!
+
+Labeled accuracy: 91.65
+Unlabeled accuracy:  94.48
+Labeled exact match:  35.18
+Unlabeled exact match:  51.53 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 1800 ... 1900 ... 2000 ... 2100 ... 2200 ... 2300 ... 2400 ... 
+.10 ms for each arc!
+2.30 ms for each sentence!
+
+Labeled accuracy: 98.72
+Unlabeled accuracy:  98.97
+Labeled exact match:  91.80
+Unlabeled exact match:  91.80 
+
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: rm[K[Kls
+[0m[01;34mjar[0m           [01;34mMETA-INF[0m      no_train.sh.e14593  [01;34msample_data[0m  train.sh~        unitTest.sh
+license       no_test.sh    no_train.sh.o14593  [01;34msrc[0m          train.sh.e14592  unitTest.sh~
+LICENSE.md    no_test.sh~   out                 test.sh      train.sh.e14594
+mattrain.sh   no_train.sh   [01;34mpunc_files[0m          test.sh~     train.sh.o14592
+mattrain.sh~  no_train.sh~  README.md           train.sh     train.sh.o14594
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: rm *1459[K[K[K[K[K[K[K[Kcat train.sh.e1459
+cat: train.sh.e1459: No such file or directory
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: cat train.sh.e14592
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.40 ms for each arc!
+9.43 ms for each sentence!
+
+Labeled accuracy: 89.96
+Unlabeled accuracy:  93.17
+Labeled exact match:  29.82
+Unlabeled exact match:  45.00 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.56 ms for each arc!
+13.18 ms for each sentence!
+
+Labeled accuracy: 90.83
+Unlabeled accuracy:  93.90
+Labeled exact match:  32.88
+Unlabeled exact match:  48.47 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.38 ms for each arc!
+8.94 ms for each sentence!
+
+Labeled accuracy: 91.29
+Unlabeled accuracy:  94.25
+Labeled exact match:  33.94
+Unlabeled exact match:  49.88 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.34 ms for each arc!
+8.10 ms for each sentence!
+
+Labeled accuracy: 91.48
+Unlabeled accuracy:  94.38
+Labeled exact match:  35.00
+Unlabeled exact match:  50.71 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.36 ms for each arc!
+8.49 ms for each sentence!
+
+Labeled accuracy: 91.61
+Unlabeled accuracy:  94.47
+Labeled exact match:  35.00
+Unlabeled exact match:  51.24 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.41 ms for each arc!
+9.61 ms for each sentence!
+
+Labeled accuracy: 91.65
+Unlabeled accuracy:  94.51
+Labeled exact match:  35.00
+Unlabeled exact match:  51.35 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.39 ms for each arc!
+9.22 ms for each sentence!
+
+Labeled accuracy: 91.72
+Unlabeled accuracy:  94.59
+Labeled exact match:  34.82
+Unlabeled exact match:  51.47 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.40 ms for each arc!
+9.46 ms for each sentence!
+
+Labeled accuracy: 91.71
+Unlabeled accuracy:  94.54
+Labeled exact match:  35.12
+Unlabeled exact match:  51.71 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.39 ms for each arc!
+9.30 ms for each sentence!
+
+Labeled accuracy: 91.73
+Unlabeled accuracy:  94.56
+Labeled exact match:  35.12
+Unlabeled exact match:  52.06 
+
+100 ... 200 ... 300 ... 400 ... 500 ... 600 ... 700 ... 800 ... 900 ... 1000 ... 1100 ... 1200 ... 1300 ... 1400 ... 1500 ... 1600 ... 1700 ... 
+.40 ms for each arc!
+9.37 ms for each sentence!
+
+Labeled accuracy: 91.73
+Unlabeled accuracy:  94.58
+Labeled exact match:  35.18
+Unlabeled exact match:  52.18 
+
+Error: Unable to access jarfile YaraParser.jar
+Error: Unable to access jarfile YaraParser.jar
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: rm *14592
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: ls
+[0m[01;34mjar[0m          mattrain.sh~  no_train.sh         out          [01;34msrc[0m       train.sh~        unitTest.sh~
+license      [01;34mMETA-INF[0m      no_train.sh~        [01;34mpunc_files[0m   test.sh   train.sh.e14594
+LICENSE.md   no_test.sh    no_train.sh.e14593  README.md    test.sh~  train.sh.o14594
+mattrain.sh  no_test.sh~   no_train.sh.o14593  [01;34msample_data[0m  train.sh  unitTest.sh
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871:  qlogin -q gpuinteractive
+Your job 14998 ("QLOGIN") has been submitted
+waiting for interactive job to be scheduled ...Your "qlogin" request could not be scheduled, try again later.
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: qstat
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871:  qlogin -q gpuinteractive
+Your job 14999 ("QLOGIN") has been submitted
+waiting for interactive job to be scheduled ...Your "qlogin" request could not be scheduled, try again later.
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: qstat
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: qstat
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: qstat qlogin -q gpuinteractive
+Your job 15000 ("QLOGIN") has been submitted
+waiting for interactive job to be scheduled ...Your "qlogin" request could not be scheduled, try again later.
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: th
+[?1034h[0m 
+  ______             __   [1;30m|  Torch7                                        [0m 
+ /_  __/__  ________/ /   [1;30m|  [0m[0;35mScientific computing for Lua.[0m 
+  / / / _ \/ __/ __/ _ \  [1;30m|  Type ? for help                               [0m 
+ /_/  \___/_/  \__/_//_/  [1;30m|  [0m[0;34mhttps://github.com/torch        [0m 
+                          [1;30m|  [0m[0;34mhttp://torch.ch                 [0m 
+[0m	
+th> x = torch.Tensor()4),)5),)6)
+                                                                      [0m[1;30m[0.0001s][0m[0m	
+th> x:size(1)
+[0;36m4[0m	
+                                                                      [0m[1;30m[0.0001s][0m[0m	
+th> x[1][2]
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+[torch.DoubleTensor of size 6]
+
+                                                                      [0m[1;30m[0.1133s][0m[0m	
+th> exit
+Do you really want to exit ([y]/n)? y
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: th qlogin -q gpuinteractive
+Your job 15002 ("QLOGIN") has been submitted
+waiting for interactive job to be scheduled ...Your "qlogin" request could not be scheduled, try again later.
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871:  qlogin -q gpuinteractive
+Your job 15003 ("QLOGIN") has been submitted
+waiting for interactive job to be scheduled ...Your "qlogin" request could not be scheduled, try again later.
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: qusb [K[K[K[Ksub -cwd unitTest.sh
+Your job 15004 ("unitTest.sh") has been submitted
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: s[Kqstat
+job-ID  prior   name       user         state submit/start at     queue                          slots ja-task-ID 
+-----------------------------------------------------------------------------------------------------------------
+  15004 0.00000 unitTest.s s1544871     qw    08/01/2016 11:32:27                                    1        
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: qstat
+job-ID  prior   name       user         state submit/start at     queue                          slots ja-task-ID 
+-----------------------------------------------------------------------------------------------------------------
+  15004 0.00000 unitTest.s s1544871     qw    08/01/2016 11:32:27                                    1        
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: qstat
+job-ID  prior   name       user         state submit/start at     queue                          slots ja-task-ID 
+-----------------------------------------------------------------------------------------------------------------
+  15004 0.00000 unitTest.s s1544871     qw    08/01/2016 11:32:27                                    1        
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: qstat
+job-ID  prior   name       user         state submit/start at     queue                          slots ja-task-ID 
+-----------------------------------------------------------------------------------------------------------------
+  15004 0.00000 unitTest.s s1544871     qw    08/01/2016 11:32:27                                    1        
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: qdel 15004
+s1544871 has deleted job 15004
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: qstat
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: ls
+[0m[01;34mjar[0m          mattrain.sh~  no_train.sh         out          [01;34msrc[0m       train.sh~        unitTest.sh~
+license      [01;34mMETA-INF[0m      no_train.sh~        [01;34mpunc_files[0m   test.sh   train.sh.e14594
+LICENSE.md   no_test.sh    no_train.sh.e14593  README.md    test.sh~  train.sh.o14594
+mattrain.sh  no_test.sh~   no_train.sh.o14593  [01;34msample_data[0m  train.sh  unitTest.sh
+]2;s1544871 @ porthemmet:/home/s1544871/YaraParser]1;porthemmet[porthemmet]s1544871: cd
+]2;s1544871 @ porthemmet:/home/s1544871]1;porthemmet[porthemmet]s1544871: cd data/
+]2;s1544871 @ porthemmet:/home/s1544871/data]1;porthemmet[porthemmet]s1544871: ls
+dependencyEmbeds.dat  deps.words      idToDependency.dat  sentences.dat  vecModel.dep
+dependencyToId.dat    [0m[01;31mdeps.words.bz2[0m  idToWord.dat        test.dep       vecModel.dep.tmp
+[01;32mdependency.txt[0m        dev.dep         [01;34mmodel[0m               test.txt       wordEmbeds.dat
+deps.compcontexts     dev.txt         no_model.dep        train.dep      wordToId.dat
+deps.contexts         headEmbeds.dat  no_model.dep.tmp    train.txt
+]2;s1544871 @ porthemmet:/home/s1544871/data]1;porthemmet[porthemmet]s1544871: help[K[K[K[Khead -n 100 no_model.dep
+1	No	_	RB	_	_	4	ADV	_	_
+2	,	_	,	_	_	4	P	_	_
+3	it	_	PRP	_	_	4	SBJ	_	_
+4	was	_	VBD	_	_	0	ROOT	_	_
+5	n't	_	RB	_	_	4	ADV	_	_
+6	Black	_	NNP	_	_	7	NAME	_	_
+7	Monday	_	NNP	_	_	4	PRD	_	_
+8	.	_	.	_	_	4	P	_	_
+
+1	But	_	CC	_	_	33	DEP	_	_
+2	while	_	IN	_	_	33	ADV	_	_
+3	the	_	DT	_	_	7	NMOD	_	_
+4	New	_	NNP	_	_	7	NAME	_	_
+5	York	_	NNP	_	_	7	NAME	_	_
+6	Stock	_	NNP	_	_	7	NAME	_	_
+7	Exchange	_	NNP	_	_	8	SBJ	_	_
+8	did	_	VBD	_	_	2	SUB	_	_
+9	n't	_	RB	_	_	8	ADV	_	_
+10	fall	_	VB	_	_	8	VC	_	_
+11	apart	_	RB	_	_	10	ADV	_	_
+12	Friday	_	NNP	_	_	10	TMP	_	_
+13	as	_	IN	_	_	10	TMP	_	_
+14	the	_	DT	_	_	18	NMOD	_	_
+15	Dow	_	NNP	_	_	18	NAME	_	_
+16	Jones	_	NNP	_	_	18	NAME	_	_
+17	Industrial	_	NNP	_	_	18	NAME	_	_
+18	Average	_	NNP	_	_	19	SBJ	_	_
+19	plunged	_	VBD	_	_	13	SUB	_	_
+20	190.58	_	CD	_	_	21	NMOD	_	_
+21	points	_	NNS	_	_	19	EXT	_	_
+22	--	_	:	_	_	23	P	_	_
+23	most	_	JJS	_	_	21	PRN	_	_
+24	of	_	IN	_	_	23	NMOD	_	_
+25	it	_	PRP	_	_	24	PMOD	_	_
+26	in	_	IN	_	_	23	TMP	_	_
+27	the	_	DT	_	_	29	NMOD	_	_
+28	final	_	JJ	_	_	29	NMOD	_	_
+29	hour	_	NN	_	_	26	PMOD	_	_
+30	--	_	:	_	_	23	P	_	_
+31	it	_	PRP	_	_	33	SBJ	_	_
+32	barely	_	RB	_	_	33	ADV	_	_
+33	managed	_	VBD	_	_	0	ROOT	_	_
+34	to	_	TO	_	_	33	OPRD	_	_
+35	stay	_	VB	_	_	34	IM	_	_
+36	this	_	DT	_	_	37	NMOD	_	_
+37	side	_	NN	_	_	35	LOC-PRD	_	_
+38	of	_	IN	_	_	37	NMOD	_	_
+39	chaos	_	NN	_	_	38	PMOD	_	_
+40	.	_	.	_	_	33	P	_	_
+
+1	Some	_	DT	_	_	4	NMOD	_	_
+2	``	_	``	_	_	4	P	_	_
+3	circuit	_	NN	_	_	4	NMOD	_	_
+4	breakers	_	NNS	_	_	12	SBJ	_	_
+5	''	_	''	_	_	4	P	_	_
+6	installed	_	VBN	_	_	4	APPO	_	_
+7	after	_	IN	_	_	6	TMP	_	_
+8	the	_	DT	_	_	11	NMOD	_	_
+9	October	_	NNP	_	_	11	NMOD	_	_
+10	1987	_	CD	_	_	11	NMOD	_	_
+11	crash	_	NN	_	_	7	PMOD	_	_
+12	failed	_	VBD	_	_	18	OBJ	_	_
+13	their	_	PRP$	_	_	15	NMOD	_	_
+14	first	_	JJ	_	_	15	NMOD	_	_
+15	test	_	NN	_	_	12	OBJ	_	_
+16	,	_	,	_	_	18	P	_	_
+17	traders	_	NNS	_	_	18	SBJ	_	_
+18	say	_	VBP	_	_	0	ROOT	_	_
+19	,	_	,	_	_	18	P	_	_
+20	unable	_	JJ	_	_	18	ADV	_	_
+21	to	_	TO	_	_	20	AMOD	_	_
+22	cool	_	VB	_	_	21	IM	_	_
+23	the	_	DT	_	_	25	NMOD	_	_
+24	selling	_	NN	_	_	25	NMOD	_	_
+25	panic	_	NN	_	_	22	OBJ	_	_
+26	in	_	IN	_	_	25	LOC	_	_
+27	both	_	DT	_	_	28	NMOD	_	_
+28	stocks	_	NNS	_	_	26	PMOD	_	_
+29	and	_	CC	_	_	28	COORD	_	_
+30	futures	_	NNS	_	_	29	CONJ	_	_
+31	.	_	.	_	_	18	P	_	_
+
+1	The	_	DT	_	_	5	NMOD	_	_
+2	49	_	CD	_	_	5	NMOD	_	_
+3	stock	_	NN	_	_	5	NMOD	_	_
+4	specialist	_	NN	_	_	5	NMOD	_	_
+5	firms	_	NNS	_	_	29	SBJ	_	_
+6	on	_	IN	_	_	5	LOC	_	_
+7	the	_	DT	_	_	10	NMOD	_	_
+8	Big	_	NNP	_	_	10	NMOD	_	_
+9	Board	_	NNP	_	_	10	NMOD	_	_
+10	floor	_	NN	_	_	6	PMOD	_	_
+11	--	_	:	_	_	5	P	_	_
+12	the	_	DT	_	_	13	NMOD	_	_
+13	buyers	_	NNS	_	_	5	APPO	_	_
+14	and	_	CC	_	_	13	COORD	_	_
+15	sellers	_	NNS	_	_	14	CONJ	_	_
+16	of	_	IN	_	_	13	NMOD	_	_
+17	last	_	JJ	_	_	18	NMOD	_	_
+18	resort	_	NN	_	_	16	PMOD	_	_
+]2;s1544871 @ porthemmet:/home/s1544871/data]1;porthemmet[porthemmet]s1544871: cd[K[Kls
+dependencyEmbeds.dat  deps.words      idToDependency.dat  sentences.dat  vecModel.dep
+dependencyToId.dat    [0m[01;31mdeps.words.bz2[0m  idToWord.dat        test.dep       vecModel.dep.tmp
+[01;32mdependency.txt[0m        dev.dep         [01;34mmodel[0m               test.txt       wordEmbeds.dat
+deps.compcontexts     dev.txt         no_model.dep        train.dep      wordToId.dat
+deps.contexts         headEmbeds.dat  no_model.dep.tmp    train.txt
+]2;s1544871 @ porthemmet:/home/s1544871/data]1;porthemmet[porthemmet]s1544871: cd model/
+]2;s1544871 @ porthemmet:/home/s1544871/data/model]1;porthemmet[porthemmet]s1544871: ls
+no_model_best    no_model_iter5    no_model.__tmp__.tmp  vecModel_iter4  vecModel.__tmp__
+no_model_iter1   no_model_iter6    vecModel_best         vecModel_iter5  vecModel.__tmp__.tmp
+no_model_iter10  no_model_iter7    vecModel_iter1        vecModel_iter6
+no_model_iter2   no_model_iter8    vecModel_iter10       vecModel_iter7
+no_model_iter3   no_model_iter9    vecModel_iter2        vecModel_iter8
+no_model_iter4   no_model.__tmp__  vecModel_iter3        vecModel_iter9
+]2;s1544871 @ porthemmet:/home/s1544871/data/model]1;porthemmet[porthemmet]s1544871: ls -lh
+total 5.6G
+-rw-r--r-- 1 s1544871 people  69M Jul 30 07:27 no_model_best
+-rw-r--r-- 1 s1544871 people  37M Jul 30 04:36 no_model_iter1
+-rw-r--r-- 1 s1544871 people  69M Jul 30 07:26 no_model_iter10
+-rw-r--r-- 1 s1544871 people  47M Jul 30 04:55 no_model_iter2
+-rw-r--r-- 1 s1544871 people  53M Jul 30 05:14 no_model_iter3
+-rw-r--r-- 1 s1544871 people  57M Jul 30 05:34 no_model_iter4
+-rw-r--r-- 1 s1544871 people  61M Jul 30 05:53 no_model_iter5
+-rw-r--r-- 1 s1544871 people  63M Jul 30 06:12 no_model_iter6
+-rw-r--r-- 1 s1544871 people  65M Jul 30 06:31 no_model_iter7
+-rw-r--r-- 1 s1544871 people  67M Jul 30 06:49 no_model_iter8
+-rw-r--r-- 1 s1544871 people  68M Jul 30 07:08 no_model_iter9
+-rw-r--r-- 1 s1544871 people 1.1M Jul 30 07:26 no_model.__tmp__
+-rw-r--r-- 1 s1544871 people 273K Jul 30 07:26 no_model.__tmp__.tmp
+-rw-r--r-- 1 s1544871 people 467M Jul 30 14:32 vecModel_best
+-rw-r--r-- 1 s

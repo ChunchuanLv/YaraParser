@@ -114,6 +114,7 @@ public class ArcEagerBeamTrainer {
                if (accuracy >accuracyOndev) {
             	   accuracyOndev = accuracy;
                    infStruct.saveModel(modelPath + "_best" );
+                   System.out.print("best iter_"+i);
                }
                 parser.shutDownLiveThreads();
             }
