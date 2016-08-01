@@ -338,6 +338,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		if (values != null) {
 			int offset = values.getOffset();
 			float[] weightVector = values.getArray();
+			if ( offset<= d &&d< offset + weightVector.length)
 			if (depMat)
 					scores= weightVector[d - offset] * getCostDep(word, head, d);
 			else {
