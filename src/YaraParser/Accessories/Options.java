@@ -46,8 +46,14 @@ public class Options implements Serializable {
     public String predFile;
 
     public int partialTrainingStartingIteration;
+	public String we;
+	public String ce;
+	public String depe;
 
     public Options() {
+    	we = "deps.words";
+    	ce = "deps.compcontexts";
+    	depe = "deps.dep";
         showHelp = false;
         train = false;
         parseConllFile = false;
@@ -224,6 +230,12 @@ public class Options implements Serializable {
             else if (args[i].startsWith("depMat"))
             	options.depMat = true;
             else if (args[i].startsWith("-repPath"))
+            	options.repPath   = args[i + 1];
+            else if (args[i].startsWith("-we"))
+            	options.repPath   = args[i + 1];
+            else if (args[i].startsWith("-ce"))
+            	options.repPath   = args[i + 1];
+            else if (args[i].startsWith("-dep"))
             	options.repPath   = args[i + 1];
         }
 
@@ -431,6 +443,11 @@ public class Options implements Serializable {
         options.useExtendedFeatures = useExtendedFeatures;
         options.parsePartialConll = parsePartialConll;
         options.partialTrainingStartingIteration = partialTrainingStartingIteration;
+        options.ce = ce;
+        options.we = we;
+        options.depe = depe;
+        options.repPath = repPath;
+        options.depMat = depMat;
         return options;
     }
 }

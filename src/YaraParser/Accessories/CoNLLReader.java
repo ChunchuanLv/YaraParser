@@ -103,7 +103,7 @@ private static void readLabEmbed(HashMap<Integer, Matrix> labelRep, HashMap<Stri
     while ((line = reader.readLine()) != null) {
         String[] spl = line.split("[\t ]");
         if (spl.length == 1) {
-        	label = spl[1];
+        	label = spl[1].toUpperCase();
             if (labels.containsKey(wordMap.get(label)))
              id = labels.get(wordMap.get(label));
             else
@@ -116,13 +116,15 @@ private static void readLabEmbed(HashMap<Integer, Matrix> labelRep, HashMap<Stri
             for (int i=0;i <e2;i++)
             	mat[row][i] = Double.parseDouble(spl[i+1]);
             row++;
-            if (row == e1) 
+            if (row == e1)  {
             	labelRep.put(id, new Matrix(mat));
+            	hittedl++;
+            }
         }
     }
 }
 private static boolean lowercased;
-public static IndexMaps createIndices(String filePath, boolean labeled, boolean lowercased, String clusterFile,String repPath,boolean depMat) throws Exception {
+public static IndexMaps createIndices(String filePath, boolean labeled, boolean lowercased, String clusterFile,String repPath,boolean depMat,String we,String ce,String depe) throws Exception {
     HashMap<String, Integer> wordMap = new HashMap<String, Integer>();
     HashMap<Integer, Integer> labels = new HashMap<Integer, Integer>();
     HashMap<String, Integer> clusterMap = new HashMap<String, Integer>();
@@ -227,10 +229,10 @@ public static IndexMaps createIndices(String filePath, boolean labeled, boolean 
     }
 
     if (repPath.length() > 0) {
-    	int e1 = readWordEmbed ( wordRep,  wordMap, repPath+"/deps.words" , reader) ;
-    	int e2= readContextEmbed ( contRep,  wordMap, repPath+"/deps.compcontexts" , reader) ;
+    	int e1 = readWordEmbed ( wordRep,  wordMap, repPath+"/"+we , reader) ;
+    	int e2= readContextEmbed ( contRep,  wordMap, repPath+"/"+ce , reader) ;
     	if (depMat) {
-    	readLabEmbed ( labelRep,  wordMap,labels, repPath+"/deps.dep" , reader,e1,e2) ;
+    	readLabEmbed ( labelRep,  wordMap,labels, repPath+"/"+depe, reader,e1,e2) ;
         System.out.println(hittedl/labelRep.size());
     	}
         System.out.println(hitted/wordRep.size());

@@ -52,7 +52,7 @@ public class UnitTest {
         System.out.println("**********************************************");
         System.out.print(options);
         System.out.println("**********************************************");
-        IndexMaps maps = CoNLLReader.createIndices(options.inputFile, options.labeled, options.lowercase, options.clusterFile,options.repPath,options.depMat);
+        IndexMaps maps = CoNLLReader.createIndices(options.inputFile, options.labeled, options.lowercase, options.clusterFile,options.repPath,options.depMat,options.we,options.ce,options.depe);
         CoNLLReader reader = new CoNLLReader(options.inputFile);
         ArrayList<GoldConfiguration> dataSet = reader.readData(Integer.MAX_VALUE, false, options.labeled, options.rootFirst, options.lowercase, maps);
         System.out.println("CoNLL data reading done!");
