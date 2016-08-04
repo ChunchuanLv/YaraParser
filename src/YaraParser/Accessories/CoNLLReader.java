@@ -242,7 +242,7 @@ public class CoNLLReader {
 			int e2 = readContextEmbed(contRep, wordMap, repPath + "/" + ce, reader);
 			if (depMat) {
 				readLabEmbed(labelRep, wordMap, labels, repPath + "/" + depe, reader, e1, e2);
-				System.out.println(hittedl / labelRep.size());
+				System.out.println(hittedl / labels.size());
 			}
 			System.out.println(hitted / wordRep.size());
 			System.out.println(hittedC / contRep.size());
