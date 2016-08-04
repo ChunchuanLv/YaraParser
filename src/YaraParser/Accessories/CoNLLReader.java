@@ -50,7 +50,6 @@ private static int readWordEmbed (  HashMap<Integer, Matrix> wordRep, HashMap<St
         if (spl.length >0) {
             String word = spl[0];
             size = spl.length-1;
-            System.out.println(size);
             vector = new double[1][size];
             if (!wordMap.containsKey(word)){
                 if ( CoNLLReader.lowercased) word.toLowerCase();
@@ -111,10 +110,8 @@ private static void readLabEmbed(HashMap<Integer, Matrix> labelRep, HashMap<Stri
             	id = -1;
             row = 0;
             mat = new double[e1][e2];
-        	System.out.println(e1+", "+e2);
         }
         else if (spl.length >1) {
-        	System.out.println(row);
             for (int i=0;i <e2;i++) {
             	mat[row][i] = Double.parseDouble(spl[i]);
             }
