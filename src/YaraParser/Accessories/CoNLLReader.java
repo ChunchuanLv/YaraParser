@@ -103,7 +103,7 @@ private static void readLabEmbed(HashMap<Integer, Matrix> labelRep, HashMap<Stri
     while ((line = reader.readLine()) != null) {
         String[] spl = line.split("[\t ]");
         if (spl.length == 1) {
-        	label = spl[1].toUpperCase();
+        	label = spl[0].toUpperCase();
             if (labels.containsKey(wordMap.get(label)))
              id = labels.get(wordMap.get(label));
             else
