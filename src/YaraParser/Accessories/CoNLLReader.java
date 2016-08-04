@@ -50,6 +50,7 @@ private static int readWordEmbed (  HashMap<Integer, Matrix> wordRep, HashMap<St
         if (spl.length >0) {
             String word = spl[0];
             size = spl.length-1;
+            System.out.println("word:"+size);
             vector = new double[1][size];
             if (!wordMap.containsKey(word)){
                 if ( CoNLLReader.lowercased) word.toLowerCase();
@@ -76,6 +77,7 @@ private static int readContextEmbed (  HashMap<Integer, Matrix> wordRep, HashMap
         if (spl.length >0) {
             String word = spl[0];
             size = spl.length-1;
+            System.out.println("context:"+size);
             vector = new double[1][size];
             if (!wordMap.containsKey(word)) {
                 if ( CoNLLReader.lowercased) word.toLowerCase();
