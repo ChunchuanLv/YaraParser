@@ -29,6 +29,9 @@ import java.util.Iterator;
 public class MyTest {
 
 	public static void main(String[] args) throws Exception {
+		String s = " 0 1";
+		String[] sv =s.split("[\t ]");
+		for (int i=0;i<sv.length;i++) System.out.println(""+i+":"+sv[i]);
 		Options options = new Options();
 		options.inputFile = "../data/train.dep";
 		options.devPath = "../data/dev.dep  ";
@@ -48,7 +51,7 @@ public class MyTest {
 		// Options.getAllPossibleOptions(options);
 		// options.numOfThreads = 2;
 		// for (Options o : optionList)
-		testOption(options);
+	//	testOption(options);
 
 		System.exit(0);
 	}
