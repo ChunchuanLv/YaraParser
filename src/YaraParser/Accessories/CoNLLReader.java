@@ -170,6 +170,7 @@ public class CoNLLReader {
 				if (!wordMap.containsKey(label)) {
 					labels.put(wi, labelCount++);
 					wordMap.put(label, wi++);
+					System.out.println(label);
 				}
 			}
 		}
