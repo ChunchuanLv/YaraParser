@@ -112,8 +112,11 @@ private static void readLabEmbed(HashMap<Integer, Matrix> labelRep, HashMap<Stri
             mat = new double[e1][e2];
         }
         else if (spl.length >1) {
-            for (int i=0;i <e2;i++)
+        	System.out.println(spl.length);
+            for (int i=0;i <e2;i++) {
+            	System.out.println(spl[i]);
             	mat[row][i] = Double.parseDouble(spl[i]);
+            }
             row++;
             if (row == e1)  {
             	labelRep.put(id, new Matrix(mat));
