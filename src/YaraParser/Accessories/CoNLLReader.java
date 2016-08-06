@@ -129,6 +129,7 @@ public class CoNLLReader {
 			String[] spl = line.split("[\t ]");
 			if (spl.length == 1) {
 				label = spl[0].toUpperCase();
+				System.out.println(label);
 					ids = getLabelId(label,labelToLabel,wordMap,labels);
 				row = 0;
 				mat = new double[e1][e2];
@@ -159,7 +160,6 @@ public class CoNLLReader {
 			String[] spl = line.trim().split("-");
 			for (int i=0;i<spl.length;i++) {
 
-				System.out.println(line);
 				if (!lTol.containsKey(spl[i]) ) {
 			lTol.put(spl[i], new String[]{line});
 				}
