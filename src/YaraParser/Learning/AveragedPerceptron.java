@@ -365,7 +365,6 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		long key = word;
 		key |= head << 28;
 		key |= dep<< 56;
-		System.out.println(key);
 		if (wdp.containsKey(key)) return wdp.get(key);
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {
 			wdp.put(key,0f);
