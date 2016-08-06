@@ -99,10 +99,23 @@ public class CoNLLReader {
 		return size;
 	}
 
+	private static int getLabelId(String label,HashMap<String,String> labelToLabel,HashMap<String, Integer> wordMap,
+			HashMap<Integer, Integer> labels) {
+		int id = -1;
+		String trueLabel = label;
+		if (labelToLabel.containsKey(label))  
+			trueLabel = labelToLabel.get(label);
+		
+			
+		if (labels.containsKey(wordMap.get(trueLabel)))
+			id = labels.get(wordMap.get(trueLabel));
+		return id;
+	}
 	private static void readLabEmbed(HashMap<Integer, Matrix> labelRep, HashMap<String, Integer> wordMap,
 			HashMap<Integer, Integer> labels, String file, BufferedReader reader, int e1, int e2)
 			throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
+		HashMap<String,String> labelToLabel = createLabelToLabel("$HOME/YaraParser/labels.txt");
 		String line;
 		double[][] mat = new double[e1][e2];
 		reader = new BufferedReader(new FileReader(file));
@@ -113,10 +126,7 @@ public class CoNLLReader {
 			String[] spl = line.split("[\t ]");
 			if (spl.length == 1) {
 				label = spl[0].toUpperCase();
-				if (labels.containsKey(wordMap.get(label)))
-					id = labels.get(wordMap.get(label));
-				else
-					id = -1;
+					id = getLabelId(label,labelToLabel,wordMap,labels);
 				row = 0;
 				mat = new double[e1][e2];
 			} else if (spl.length > 1) {
@@ -125,11 +135,27 @@ public class CoNLLReader {
 				}
 				row++;
 				if (row == e1 && id !=-1) {
+					if (!labelRep.containsKey(id)) {
 					labelRep.put(id, new Matrix(mat));
 					hittedl++;
+					}else{
+						labelRep.put(id,labelRep.get(id).plus(new Matrix(mat)));
+					}
 				}
 			}
 		}
+	}
+
+	private static HashMap<String, String> createLabelToLabel(String filepath) throws IOException {
+		HashMap<String, String>  lTol = new HashMap<String, String> ();
+		BufferedReader reader = new BufferedReader(new FileReader(filepath));
+		String line;
+		while ((line = reader.readLine()) != null) {
+			String[] spl = line.trim().split("-");
+			for (int i=0;i<spl.length;i++)
+			lTol.put(spl[i], line);
+		}
+		return lTol;
 	}
 
 	private static boolean lowercased;

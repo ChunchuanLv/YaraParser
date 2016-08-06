@@ -232,11 +232,11 @@ public class Options implements Serializable {
             else if (args[i].startsWith("-repPath"))
             	options.repPath   = args[i + 1];
             else if (args[i].startsWith("-we"))
-            	options.repPath   = args[i + 1];
+            	options.we   = args[i + 1];
             else if (args[i].startsWith("-ce"))
-            	options.repPath   = args[i + 1];
-            else if (args[i].startsWith("-dep"))
-            	options.repPath   = args[i + 1];
+            	options.ce   = args[i + 1];
+            else if (args[i].startsWith("-depe"))
+            	options.depe   = args[i + 1];
         }
 
         if (options.train || options.parseTaggedFile || options.parseConllFile)
