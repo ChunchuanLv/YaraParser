@@ -106,7 +106,7 @@ public class CoNLLReader {
 			trueLabels = labelToLabel.get(label);
 
 		int[] ids =new int[trueLabels.length];
-		for (int i=1;i<trueLabels.length;i++) {
+		for (int i=0;i<trueLabels.length;i++) {
 			String trueLabel = trueLabels[i];
 		if (labels.containsKey(wordMap.get(trueLabel)))
 			ids[i] = labels.get(wordMap.get(trueLabel));
