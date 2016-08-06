@@ -21,6 +21,7 @@ import YaraParser.TransitionBasedSystem.Trainer.ArcEagerBeamTrainer;
 import java.io.FileOutputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -52,28 +53,27 @@ public class MyTest {
 		// options.numOfThreads = 2;
 		// for (Options o : optionList)
 	//	testOption(options);
- int z = 26;
- int y = 305555;
- int x = 306666;
+ int z = 66;
+ int y = 306446;
+ int x = 30634346;
  int iny = y;
-	long key = hash(x,y,z);
+ ByteBuffer key = hash(x,y,z);
 	
 	
 		System.exit(0);
 	}
-private static long hash(int x,int y,int z) {
+private static ByteBuffer hash(int x,int y,int z) {
 
-	long key = z;
-	key |= x  << 8;
-	key |= y  << 36;
+	ByteBuffer key =  ByteBuffer.allocate(10);
+	key.putInt(x);
+	key.putInt(y);
+	key.putShort((short) z);
+	
 
-	long m1 = 0b111111111;
-	long m2 = 0b1111111111111111111111111111<<8;
-	long m3 = m2<<28;
 	System.out.println("this key:"+key);
-	System.out.println("this x:"+(key&m2));
-	System.out.println("this y:"+(key&m3));
-	System.out.println("this z:"+(key&m1));
+	System.out.println("this x:"+key.getInt(0));
+	System.out.println("this y:"+key.getInt(4));
+	System.out.println("this z:"+key.getShort(8));
 	return key;
 }
 	public static void testOption(Options options) throws Exception {
