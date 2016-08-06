@@ -159,7 +159,7 @@ public class CoNLLReader {
 		while ((line = reader.readLine()) != null) {
 			String[] spl = line.trim().split("-");
 			for (int i=0;i<spl.length;i++) {
-
+				System.out.println(spl[i]+"  "+line);
 				if (!lTol.containsKey(spl[i]) ) {
 			lTol.put(spl[i], new String[]{line});
 				}
