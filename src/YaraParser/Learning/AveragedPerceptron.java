@@ -123,6 +123,7 @@ public class AveragedPerceptron {
 		labelRep =maps.getLabelRep();
 		depMat = labelRep == null ||labelRep.size() >0;
 		dep = (featSize == 27) || (featSize == 73) || (featSize == 154);
+		wdp = new HashMap<Long,Float>();
 	}
 
 	private HashMap<Integer, Matrix> wordRep;
@@ -143,6 +144,7 @@ public class AveragedPerceptron {
 		contRep = maps.getContRep();
 		labelRep =maps.getLabelRep();
 		depMat = labelRep == null ||labelRep.size() >0;
+		wdp = new HashMap<Long,Float>();
 	}
 
 	public float changeWeight(Actions actionType, int slotNum, Object featureName, int labelIndex, float change) {
