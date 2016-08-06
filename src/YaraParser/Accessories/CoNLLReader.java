@@ -110,6 +110,7 @@ public class CoNLLReader {
 			String trueLabel = trueLabels[i];
 		if (labels.containsKey(wordMap.get(trueLabel)))
 			ids[i] = labels.get(wordMap.get(trueLabel));
+		System.out.println(trueLabel);
 		}
 		return ids;
 	}
@@ -117,7 +118,7 @@ public class CoNLLReader {
 			HashMap<Integer, Integer> labels, String file, BufferedReader reader, int e1, int e2,String filepath)
 			throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		HashMap<String,String[]> labelToLabel = createLabelToLabel(filepath+"/labels.txt");
+		HashMap<String,String[]> labelToLabel = createLabelToLabel(filepath+"/labels");
 		String line;
 		double[][] mat = new double[e1][e2];
 		reader = new BufferedReader(new FileReader(file));
