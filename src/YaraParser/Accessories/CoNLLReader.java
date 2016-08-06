@@ -158,8 +158,11 @@ public class CoNLLReader {
 		while ((line = reader.readLine()) != null) {
 			String[] spl = line.trim().split("-");
 			for (int i=0;i<spl.length;i++) {
-				if (!lTol.containsKey(spl[i]) )
-			lTol.put(spl[i], new String[]{line}); 
+
+				System.out.println(line);
+				if (!lTol.containsKey(spl[i]) ) {
+			lTol.put(spl[i], new String[]{line});
+				}
 				else {
 					String[] old = lTol.get(spl[i]);
 					 String[] ls = new String[1+old.length];
@@ -212,7 +215,6 @@ public class CoNLLReader {
 				if (!wordMap.containsKey(label)) {
 					labels.put(wi, labelCount++);
 					wordMap.put(label, wi++);
-					System.out.println(label);
 				}
 			}
 		}
