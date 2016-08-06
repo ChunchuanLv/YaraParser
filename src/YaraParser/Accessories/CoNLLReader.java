@@ -285,7 +285,6 @@ public class CoNLLReader {
 			if (depMat) {
 				readLabEmbed(labelRep, wordMap, labels, repPath + "/" + depe, reader, e1, e2, repPath);
 				
-				for (int label:labelRep.keySet()) System.out.println(label);
 				System.out.println(labelRep.size()+" lES: labels  "+ labels.size());
 			}
 			System.out.println( wordRep.size()+"  wSize:hitted  "+hitted);

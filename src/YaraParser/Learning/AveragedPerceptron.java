@@ -124,7 +124,7 @@ public class AveragedPerceptron {
 		labelRep =maps.getLabelRep();
 		depMat = labelRep == null ||labelRep.size() >0;
 		dep = (featSize == 27) || (featSize == 73) || (featSize == 154);
-		wdp = new HashMap<ByteBuffer,Float>();
+		wdp = new HashMap<Integer,Float>();
 	}
 
 	private HashMap<Integer, Matrix> wordRep;
@@ -145,7 +145,7 @@ public class AveragedPerceptron {
 		contRep = maps.getContRep();
 		labelRep =maps.getLabelRep();
 		depMat = labelRep == null ||labelRep.size() >0;
-		wdp = new HashMap<ByteBuffer,Float>();
+		wdp = new HashMap<Integer,Float>();
 	}
 
 	public float changeWeight(Actions actionType, int slotNum, Object featureName, int labelIndex, float change) {
@@ -360,7 +360,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		return result ;
 	}
 
-	private HashMap<ByteBuffer,Float> wdp ;
+	private HashMap<Integer,Float> wdp ;
 	private float getCostDep(int word, int head, int dep) {
 
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {
@@ -372,10 +372,10 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		key.putShort((short) dep);
 		if (wdp.containsKey(key)) {
 		//	System.out.println("contrain:"+key);
-	//		return wdp.get(key);
+			return wdp.get(key);
 		}
 		float result = (float) wordRep.get(word).times(labelRep.get(dep)).times(contRep.get(head)).get(0, 0);
-		wdp.put(key, result);
+		wdp.put(key.hashCode(), result);
 		System.out.println("word,head,label ,result "+word+" "+head+" "+dep+" "+result);
 		return  result;
 	}
