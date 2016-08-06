@@ -49,11 +49,13 @@ public class Options implements Serializable {
 	public String we;
 	public String ce;
 	public String depe;
+	public boolean continueTrain;
 
     public Options() {
     	we = "deps.words";
     	ce = "deps.compcontexts";
     	depe = "deps.dep";
+    	continueTrain = true;
         showHelp = false;
         train = false;
         parseConllFile = false;
@@ -237,6 +239,8 @@ public class Options implements Serializable {
             	options.ce   = args[i + 1];
             else if (args[i].startsWith("-depe"))
             	options.depe   = args[i + 1];
+            else if (args[i].startsWith("continue"))
+            	options.continueTrain = false;
         }
 
         if (options.train || options.parseTaggedFile || options.parseConllFile)

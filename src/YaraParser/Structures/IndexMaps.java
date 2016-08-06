@@ -19,10 +19,14 @@ public class IndexMaps implements Serializable {
     private HashMap<Integer, Integer> brown4Clusters;
     private HashMap<Integer, Integer> brown6Clusters;
     private HashMap<String, Integer> brownFullClusters;
+	private  HashMap<Integer,Float> wdp ;
     public HashMap<Integer, Matrix> getLabelRep() {
 		return labelRep;
 	}
 
+	public HashMap<Integer, Float>  fastCompute () {
+		return wdp;
+	}
 	public HashMap<Integer, Matrix> getWordRep() {
 		return wordRep;
 	}
@@ -37,7 +41,8 @@ public class IndexMaps implements Serializable {
 
     public IndexMaps(HashMap<String, Integer> wordMap, HashMap<Integer, Integer> labels, String rootString,
                      HashMap<Integer, Integer> brown4Clusters, HashMap<Integer, Integer> brown6Clusters, HashMap<String, Integer> brownFullClusters,
-                     HashMap<Integer, Matrix> wordRep,    HashMap<Integer, Matrix>  contRep,HashMap<Integer, Matrix> labelRep) {
+                     HashMap<Integer, Matrix> wordRep,    HashMap<Integer, Matrix>  contRep,HashMap<Integer, Matrix> labelRep,
+                     HashMap<Integer,Float> wdp) {
         this.wordMap = wordMap;
         this.labels = labels;
         this.wordRep = wordRep;
@@ -54,6 +59,7 @@ public class IndexMaps implements Serializable {
         this.brown6Clusters = brown6Clusters;
         this.brownFullClusters = brownFullClusters;
         this.rootString = rootString;
+        this.wdp = wdp;
     }
 
     public Sentence makeSentence(String[] words, String[] posTags, boolean rootFirst, boolean lowerCased) {

@@ -124,7 +124,7 @@ public class AveragedPerceptron {
 		labelRep =maps.getLabelRep();
 		depMat = labelRep == null ||labelRep.size() >0;
 		dep = (featSize == 27) || (featSize == 73) || (featSize == 154);
-		wdp = new HashMap<Integer,Float>();
+		wdp = maps.fastCompute();
 	}
 
 	private HashMap<Integer, Matrix> wordRep;
@@ -145,7 +145,7 @@ public class AveragedPerceptron {
 		contRep = maps.getContRep();
 		labelRep =maps.getLabelRep();
 		depMat = labelRep == null ||labelRep.size() >0;
-		wdp = new HashMap<Integer,Float>();
+		wdp = maps.fastCompute();
 	}
 
 	public float changeWeight(Actions actionType, int slotNum, Object featureName, int labelIndex, float change) {
@@ -360,7 +360,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		return result ;
 	}
 
-	private HashMap<Integer,Float> wdp ;
+	private  HashMap<Integer,Float> wdp ;
 	private float getCostDep(int word, int head, int dep) {
 
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {

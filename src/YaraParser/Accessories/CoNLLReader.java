@@ -291,7 +291,7 @@ public class CoNLLReader {
 			System.out.println( contRep.size()+"  cSize:hitted  "+hittedC);
 		}
 		return new IndexMaps(wordMap, labels, rootString, cluster4Map, cluster6Map, clusterMap, wordRep, contRep,
-				labelRep);
+				labelRep, new HashMap<Integer,Float>());
 	}
 
 	/**
