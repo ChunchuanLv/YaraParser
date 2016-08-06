@@ -110,7 +110,7 @@ public class CoNLLReader {
 			String trueLabel = trueLabels[i];
 		if (labels.containsKey(wordMap.get(trueLabel)))
 			ids[i] = labels.get(wordMap.get(trueLabel));
-		System.out.println(trueLabel);
+		System.out.println("id "+trueLabel);
 		}
 		return ids;
 	}
@@ -129,7 +129,7 @@ public class CoNLLReader {
 			String[] spl = line.split("[\t ]");
 			if (spl.length == 1) {
 				label = spl[0].toUpperCase();
-				System.out.println(label);
+				System.out.println("first line: "+label);
 					ids = getLabelId(label,labelToLabel,wordMap,labels);
 				row = 0;
 				mat = new double[e1][e2];
