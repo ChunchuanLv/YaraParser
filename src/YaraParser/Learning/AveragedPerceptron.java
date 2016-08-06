@@ -355,9 +355,6 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 }
 	private float getCost(int word, int head) {
 
-	//	System.out.println(word);
-	//	System.out.println(wordRep.get(word));
-	//	System.out.println(wordRep.get(head));
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)) return 0;
 		float result = (float) wordRep.get(word).times(contRep.get(head)).get(0, 0);
 		return result ;
@@ -375,11 +372,11 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		key.putShort((short) dep);
 		if (wdp.containsKey(key)) {
 		//	System.out.println("contrain:"+key);
-			return wdp.get(key);
+	//		return wdp.get(key);
 		}
 		float result = (float) wordRep.get(word).times(labelRep.get(dep)).times(contRep.get(head)).get(0, 0);
 		wdp.put(key, result);
-		System.out.println("word,head,label  "+word+" "+head+" "+dep);
+		System.out.println("word,head,label ,result "+word+" "+head+" "+dep+" "+result);
 		return  result;
 	}
 
