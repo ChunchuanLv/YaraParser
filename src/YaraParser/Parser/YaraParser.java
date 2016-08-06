@@ -92,8 +92,7 @@ public class YaraParser {
 				InfStruct infStruct = new InfStruct(options.modelFile);
 				ArrayList<Integer> dependencyLabels = infStruct.dependencyLabels;
 				IndexMaps maps = infStruct.maps;
-
-				Options inf_options = infStruct.options;
+				infStruct.options = options;
 				AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct, maps);
 
 				int featureSize = averagedPerceptron.featureSize();
