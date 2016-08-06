@@ -140,6 +140,7 @@ public class CoNLLReader {
 				row++;
 				if (row == e1 && ids.length!=0) {
 					for (int id :ids) {
+						System.out.println("to put "+id);
 					if (!labelRep.containsKey(id)) {
 					labelRep.put(id, new Matrix(mat));
 					hittedl++;
