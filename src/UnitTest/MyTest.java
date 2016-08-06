@@ -52,23 +52,30 @@ public class MyTest {
 		// options.numOfThreads = 2;
 		// for (Options o : optionList)
 	//	testOption(options);
- int x = 26;
+ int z = 26;
  int y = 305555;
- int z = 306666;
+ int x = 306666;
  int iny = y;
-	long key = iny;
-	System.out.println(key);
-	long inz = (2)  << 28;
-	key |=inz;
-	System.out.println(key);
-	long inx =(x)<< 56;
-	key |= inx;
-	System.out.println(key);
-	long m = Long.MAX_VALUE;
-	System.out.println((( key^ inx)));
+	long key = hash(x,y,z);
+	
+	
 		System.exit(0);
 	}
+private static long hash(int x,int y,int z) {
 
+	long key = z;
+	key |= x  << 8;
+	key |= y  << 36;
+
+	long m1 = 0b111111111;
+	long m2 = 0b1111111111111111111111111111<<8;
+	long m3 = m2<<28;
+	System.out.println("this key:"+key);
+	System.out.println("this x:"+(key&m2));
+	System.out.println("this y:"+(key&m3));
+	System.out.println("this z:"+(key&m1));
+	return key;
+}
 	public static void testOption(Options options) throws Exception {
 		System.out.println("**********************************************");
 		System.out.print(options);

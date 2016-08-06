@@ -364,6 +364,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 
 	private HashMap<Long,Float> wdp ;
 	private float getCostDep(int word, int head, int dep) {
+		if (true) return 0;
 		long key = word;
 		key |= head << 28;
 		key |= dep<< 56;
@@ -372,7 +373,6 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 			return wdp.get(key);
 		}
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {
-			wdp.put(key,0f);
 			return 0;
 		}
 		float result = (float) wordRep.get(word).times(labelRep.get(dep)).times(contRep.get(head)).get(0, 0);
