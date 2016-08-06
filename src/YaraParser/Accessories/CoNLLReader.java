@@ -112,10 +112,10 @@ public class CoNLLReader {
 		return id;
 	}
 	private static void readLabEmbed(HashMap<Integer, Matrix> labelRep, HashMap<String, Integer> wordMap,
-			HashMap<Integer, Integer> labels, String file, BufferedReader reader, int e1, int e2)
+			HashMap<Integer, Integer> labels, String file, BufferedReader reader, int e1, int e2,String filepath)
 			throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		HashMap<String,String> labelToLabel = createLabelToLabel("$HOME/YaraParser/labels.txt");
+		HashMap<String,String> labelToLabel = createLabelToLabel(filepath+"/labels.txt");
 		String line;
 		double[][] mat = new double[e1][e2];
 		reader = new BufferedReader(new FileReader(file));
@@ -155,6 +155,7 @@ public class CoNLLReader {
 			for (int i=0;i<spl.length;i++)
 			lTol.put(spl[i], line);
 		}
+		reader.close();
 		return lTol;
 	}
 
@@ -268,7 +269,7 @@ public class CoNLLReader {
 			int e1 = readWordEmbed(wordRep, wordMap, repPath + "/" + we, reader);
 			int e2 = readContextEmbed(contRep, wordMap, repPath + "/" + ce, reader);
 			if (depMat) {
-				readLabEmbed(labelRep, wordMap, labels, repPath + "/" + depe, reader, e1, e2);
+				readLabEmbed(labelRep, wordMap, labels, repPath + "/" + depe, reader, e1, e2,repPath);
 				System.out.println(hittedl / labels.size());
 			}
 			System.out.println(hitted / wordRep.size());
