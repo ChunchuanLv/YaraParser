@@ -99,34 +99,36 @@ public class CoNLLReader {
 		return size;
 	}
 
-	private static int getLabelId(String label,HashMap<String,String> labelToLabel,HashMap<String, Integer> wordMap,
+	private static int[] getLabelId(String label,HashMap<String,String[]> labelToLabel,HashMap<String, Integer> wordMap,
 			HashMap<Integer, Integer> labels) {
-		int id = -1;
-		String trueLabel = label;
+		String[] trueLabels = new String[]{label};
 		if (labelToLabel.containsKey(label))  
-			trueLabel = labelToLabel.get(label);
-		
-			
+			trueLabels = labelToLabel.get(label);
+
+		int[] ids =new int[trueLabels.length];
+		for (int i=1;i<trueLabels.length;i++) {
+			String trueLabel = trueLabels[i];
 		if (labels.containsKey(wordMap.get(trueLabel)))
-			id = labels.get(wordMap.get(trueLabel));
-		return id;
+			ids[i] = labels.get(wordMap.get(trueLabel));
+		}
+		return ids;
 	}
 	private static void readLabEmbed(HashMap<Integer, Matrix> labelRep, HashMap<String, Integer> wordMap,
 			HashMap<Integer, Integer> labels, String file, BufferedReader reader, int e1, int e2,String filepath)
 			throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		HashMap<String,String> labelToLabel = createLabelToLabel(filepath+"/labels.txt");
+		HashMap<String,String[]> labelToLabel = createLabelToLabel(filepath+"/labels.txt");
 		String line;
 		double[][] mat = new double[e1][e2];
 		reader = new BufferedReader(new FileReader(file));
 		int row = 0;
-		int id = -1;
+		int[] ids =  new int[] {};
 		String label;
 		while ((line = reader.readLine()) != null) {
 			String[] spl = line.split("[\t ]");
 			if (spl.length == 1) {
 				label = spl[0].toUpperCase();
-					id = getLabelId(label,labelToLabel,wordMap,labels);
+					ids = getLabelId(label,labelToLabel,wordMap,labels);
 				row = 0;
 				mat = new double[e1][e2];
 			} else if (spl.length > 1) {
@@ -134,26 +136,38 @@ public class CoNLLReader {
 					mat[row][i] = Double.parseDouble(spl[i]);
 				}
 				row++;
-				if (row == e1 && id !=-1) {
+				if (row == e1 && ids.length!=0) {
+					for (int id :ids) {
 					if (!labelRep.containsKey(id)) {
 					labelRep.put(id, new Matrix(mat));
 					hittedl++;
 					}else{
 						labelRep.put(id,labelRep.get(id).plus(new Matrix(mat)));
 					}
+					}
 				}
 			}
 		}
 	}
 
-	private static HashMap<String, String> createLabelToLabel(String filepath) throws IOException {
-		HashMap<String, String>  lTol = new HashMap<String, String> ();
+	private static HashMap<String, String[]> createLabelToLabel(String filepath) throws IOException {
+		HashMap<String, String[]>  lTol = new HashMap<String, String[]> ();
 		BufferedReader reader = new BufferedReader(new FileReader(filepath));
 		String line;
 		while ((line = reader.readLine()) != null) {
 			String[] spl = line.trim().split("-");
-			for (int i=0;i<spl.length;i++)
-			lTol.put(spl[i], line);
+			for (int i=0;i<spl.length;i++) {
+				if (!lTol.containsKey(spl[i]) )
+			lTol.put(spl[i], new String[]{line}); 
+				else {
+					String[] old = lTol.get(spl[i]);
+					 String[] ls = new String[1+old.length];
+					 for (int j=0;j<ls.length-1;j++)
+						 ls[j] = old[j];
+					 ls[ls.length-1] = line;
+					lTol.put(spl[i], ls); 
+				}
+			}
 		}
 		reader.close();
 		return lTol;
@@ -270,7 +284,7 @@ public class CoNLLReader {
 			int e2 = readContextEmbed(contRep, wordMap, repPath + "/" + ce, reader);
 			if (depMat) {
 				readLabEmbed(labelRep, wordMap, labels, repPath + "/" + depe, reader, e1, e2,repPath);
-				System.out.println(hittedl / labels.size());
+				System.out.println(labelRep.size() / labels.size());
 			}
 			System.out.println(hitted / wordRep.size());
 			System.out.println(hittedC / contRep.size());
