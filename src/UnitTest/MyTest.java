@@ -52,7 +52,20 @@ public class MyTest {
 		// options.numOfThreads = 2;
 		// for (Options o : optionList)
 	//	testOption(options);
-
+ int x = 26;
+ int y = 305555;
+ int z = 306666;
+ int iny = y;
+	long key = iny;
+	System.out.println(key);
+	long inz = (2)  << 28;
+	key |=inz;
+	System.out.println(key);
+	long inx =(x)<< 56;
+	key |= inx;
+	System.out.println(key);
+	long m = Long.MAX_VALUE;
+	System.out.println((( key^ inx)));
 		System.exit(0);
 	}
 

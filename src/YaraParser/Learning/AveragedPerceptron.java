@@ -360,9 +360,20 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		return result ;
 	}
 
+	private HashMap<Long,Float> wdp = new HashMap<Long,Float>();
 	private float getCostDep(int word, int head, int dep) {
-		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) return 0;
-		return  (float) wordRep.get(word).times(labelRep.get(dep)).times(contRep.get(head)).get(0, 0);
+		long key = word;
+		key |= head << 28;
+		key |= dep<< 56;
+		System.out.println(key);
+		if (wdp.containsKey(key)) return wdp.get(key);
+		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {
+			wdp.put(key,0f);
+			return 0;
+		}
+		float result = (float) wordRep.get(word).times(labelRep.get(dep)).times(contRep.get(head)).get(0, 0);
+		wdp.put(key, result);
+		return  result;
 	}
 
 	public float[] rightArcScores(final Object[] features, boolean decode) {
