@@ -365,18 +365,18 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {
 			return 0;
-		}/*
+		}
 		ByteBuffer key =  ByteBuffer.allocate(10);
 		key.putInt(word);
 		key.putInt(head);
 		key.putShort((short) dep);
 		if (wdp.containsKey(key)) {
-		//	System.out.println("contrain:"+key);
+			System.out.println("contrain:"+key);
 			return wdp.get(key);
 		}
 		float result = (float) wordRep.get(word).times(labelRep.get(dep)).times(contRep.get(head)).get(0, 0);
-		wdp.put(key.hashCode(), result);*/
-	//	System.out.println("word,head,label ,result "+word+" "+head+" "+dep+" "+result);
+		wdp.put(key.hashCode(), result);
+		System.out.println("word,head,label ,result "+word+" "+head+" "+dep+" "+result);
 		return  (float) wordRep.get(word).times(labelRep.get(dep)).times(contRep.get(head)).get(0, 0);
 	}
 
