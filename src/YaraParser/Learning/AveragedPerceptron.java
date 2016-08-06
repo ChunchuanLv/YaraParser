@@ -362,18 +362,22 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		return result ;
 	}
 
-	private HashMap<Long,Float> wdp = new HashMap<Long,Float>();
+	private HashMap<Long,Float> wdp ;
 	private float getCostDep(int word, int head, int dep) {
 		long key = word;
 		key |= head << 28;
 		key |= dep<< 56;
-		if (wdp.containsKey(key)) return wdp.get(key);
+		if (wdp.containsKey(key)) {
+			System.out.println("contrain:"+key);
+			return wdp.get(key);
+		}
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {
 			wdp.put(key,0f);
 			return 0;
 		}
 		float result = (float) wordRep.get(word).times(labelRep.get(dep)).times(contRep.get(head)).get(0, 0);
 		wdp.put(key, result);
+		System.out.println("add:"+key);
 		return  result;
 	}
 
