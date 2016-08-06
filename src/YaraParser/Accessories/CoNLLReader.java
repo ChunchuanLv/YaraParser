@@ -85,7 +85,7 @@ public class CoNLLReader {
 					word.toLowerCase();
 				size = spl.length - 1;
 				vector = new double[1][size];
-				if (wordMap.containsKey(word)) {
+				if (!wordMap.containsKey(word)) {
 					wordMap.put(word, wordMap.size());
 				} else {
 					hittedC++;
