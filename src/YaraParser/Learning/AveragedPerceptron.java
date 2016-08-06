@@ -379,7 +379,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		}
 		float result = (float) wordRep.get(word).times(labelRep.get(dep)).times(contRep.get(head)).get(0, 0);
 		wdp.put(key, result);
-		System.out.println("add:"+key);
+		System.out.println("word,head,label  "+word+" "+head+" "+dep);
 		return  result;
 	}
 

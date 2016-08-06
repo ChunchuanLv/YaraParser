@@ -53,11 +53,11 @@ public class CoNLLReader {
 			String[] spl = line.split("[\t ]");
 			if (spl.length > 0) {
 				String word = spl[0];
+				if (CoNLLReader.lowercased)
+					word.toLowerCase();
 				size = spl.length - 1;
 				vector = new double[1][size];
 				if (!wordMap.containsKey(word)) {
-					if (CoNLLReader.lowercased)
-						word.toLowerCase();
 					wordMap.put(word, wordMap.size());
 				} else {
 					hitted++;
@@ -81,11 +81,11 @@ public class CoNLLReader {
 			String[] spl = line.split("[\t ]");
 			if (spl.length > 0) {
 				String word = spl[0];
+				if (CoNLLReader.lowercased)
+					word.toLowerCase();
 				size = spl.length - 1;
 				vector = new double[1][size];
-				if (!wordMap.containsKey(word)) {
-					if (CoNLLReader.lowercased)
-						word.toLowerCase();
+				if (wordMap.containsKey(word)) {
 					wordMap.put(word, wordMap.size());
 				} else {
 					hittedC++;
@@ -284,11 +284,12 @@ public class CoNLLReader {
 			int e2 = readContextEmbed(contRep, wordMap, repPath + "/" + ce, reader);
 			if (depMat) {
 				readLabEmbed(labelRep, wordMap, labels, repPath + "/" + depe, reader, e1, e2, repPath);
-				System.out.println(hittedl/ labels.size());
-				System.out.println(labelRep.get(26));
+				
+				for (int label:labelRep.keySet()) System.out.println(label);
+				System.out.println(labelRep.size()+" lES: labels  "+ labels.size());
 			}
-			System.out.println(hitted / wordRep.size());
-			System.out.println(hittedC / contRep.size());
+			System.out.println( wordRep.size()+"  wSize:hitted  "+hitted);
+			System.out.println( contRep.size()+"  cSize:hitted  "+hittedC);
 		}
 		return new IndexMaps(wordMap, labels, rootString, cluster4Map, cluster6Map, clusterMap, wordRep, contRep,
 				labelRep);
