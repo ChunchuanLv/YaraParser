@@ -379,7 +379,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		BigInteger code = new BigInteger(key.array());
 		if (wdp.containsKey(code)) {
 		//	System.out.println("contrain:"+key);
-			System.out.println(wdp.size()+" "+word+" "+head+" "+ dep+" "+code);
+	//		System.out.println(wdp.size()+" "+word+" "+head+" "+ dep+" "+code);
 			return wdp.get(code);
 		}
 

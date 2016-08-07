@@ -20,7 +20,7 @@ public class IndexMaps implements Serializable {
     private HashMap<Integer, Integer> brown4Clusters;
     private HashMap<Integer, Integer> brown6Clusters;
     private HashMap<String, Integer> brownFullClusters;
-	private  HashMap<BigInteger,Float> wdp ;
+	private static  HashMap<BigInteger,Float> wdp ;
     public HashMap<Integer, float[][]> getLabelRep() {
 		return labelRep;
 	}
