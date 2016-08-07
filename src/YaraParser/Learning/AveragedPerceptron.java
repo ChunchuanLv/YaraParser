@@ -127,9 +127,9 @@ public class AveragedPerceptron {
 		wdp = maps.fastCompute();
 	}
 
-	private HashMap<Integer, Matrix> wordRep;
-    private HashMap<Integer, Matrix> contRep;
-    private HashMap<Integer, Matrix> labelRep;
+	private HashMap<Integer, float[]> wordRep;
+    private HashMap<Integer,  float[]> contRep;
+    private HashMap<Integer,  float[][]> labelRep;
     
 	private AveragedPerceptron(InfStruct infStruct) {
 		this(infStruct.shiftFeatureAveragedWeights, infStruct.reduceFeatureAveragedWeights,
@@ -356,7 +356,12 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 	private float getCost(int word, int head) {
 
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)) return 0;
-		float result = (float) wordRep.get(word).times(contRep.get(head)).get(0, 0);
+		float result = 0;
+		float[] v1 =  wordRep.get(word);
+		float[] v2 =  contRep.get(head);
+		int size = v1.length;
+		for (int i=0;i<size;i++)
+			result += v1[i]*v2[i];
 		return result ;
 	}
 
@@ -374,11 +379,28 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		//	System.out.println("contrain:"+key);
 			return wdp.get(key);
 		}
-		float result = (float) wordRep.get(word).times(labelRep.get(dep)).times(contRep.get(head)).get(0, 0);
+
+		float[] v1 =  wordRep.get(word);
+		float[] v2 =  contRep.get(head);
+		float[][] m = labelRep.get(dep);
+		float result = 0f;
+		int size1 = v1.length;
+		int size2 = v2.length;
+		 for (int i =0;i<size1;i++)
+			 for (int j =0;j<size2;j++)
+				 result +=  v1[i]*v2[j]*m[i][j];
 		wdp.put(key.hashCode(), result);
 	//	System.out.println("word,head,label ,result "+word+" "+head+" "+dep+" "+result);
 		return  result;
 	}
+	
+
+	private float[] getCostDep(int word, int head, int depS, int depE) {
+		float[] result = new float[depE-depS];
+	//	System.out.println("word,head,label ,result "+word+" "+head+" "+dep+" "+result);
+		return  result;
+	}
+	
 
 	public float[] rightArcScores(final Object[] features, boolean decode) {
 		float scores[] = new float[dependencySize];

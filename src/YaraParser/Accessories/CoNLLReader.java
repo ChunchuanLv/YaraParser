@@ -43,10 +43,9 @@ public class CoNLLReader {
 	public static double hittedl = 0;
 	public static double hittedC = 0;
 
-	private static int readWordEmbed(HashMap<Integer, Matrix> wordRep, HashMap<String, Integer> wordMap, String file,
+	private static int readWordEmbed(HashMap<Integer, float[]> wordRep, HashMap<String, Integer> wordMap, String file,
 			BufferedReader reader) throws NumberFormatException, IOException {
 		String line;
-		double[][] vector;
 		int size = 0;
 		reader = new BufferedReader(new FileReader(file));
 		while ((line = reader.readLine()) != null) {
@@ -56,7 +55,8 @@ public class CoNLLReader {
 				if (CoNLLReader.lowercased)
 					word.toLowerCase();
 				size = spl.length - 1;
-				vector = new double[1][size];
+
+				float[] vector  = new float[size];
 				if (!wordMap.containsKey(word)) {
 					wordMap.put(word, wordMap.size());
 				} else {
@@ -64,17 +64,18 @@ public class CoNLLReader {
 				}
 				int id = wordMap.get(word);
 				for (int i = 0; i < size; i++)
-					vector[0][i] = Double.parseDouble(spl[i + 1]);
-				wordRep.put(id, new Matrix(vector));
+					vector[i] = Float.parseFloat(spl[i + 1]);
+				wordRep.put(id, vector);
 			}
 		}
 		return size;
 	}
 
-	private static int readContextEmbed(HashMap<Integer, Matrix> wordRep, HashMap<String, Integer> wordMap, String file,
+	private static int readContextEmbed(HashMap<Integer, 
+			float[]> wordRep, HashMap<String, Integer> wordMap, String file,
 			BufferedReader reader) throws NumberFormatException, IOException {
 		String line;
-		double[][] vector;
+		
 		int size = 0;
 		reader = new BufferedReader(new FileReader(file));
 		while ((line = reader.readLine()) != null) {
@@ -84,7 +85,7 @@ public class CoNLLReader {
 				if (CoNLLReader.lowercased)
 					word.toLowerCase();
 				size = spl.length - 1;
-				vector = new double[1][size];
+				float[] vector  = new float[size];
 				if (!wordMap.containsKey(word)) {
 					wordMap.put(word, wordMap.size());
 				} else {
@@ -92,8 +93,8 @@ public class CoNLLReader {
 				}
 				int id = wordMap.get(word);
 				for (int i = 0; i < size; i++)
-					vector[0][i] = Double.parseDouble(spl[i + 1]);
-				wordRep.put(id, new Matrix(vector).transpose());
+					vector[i] = Float.parseFloat(spl[i + 1]);
+				wordRep.put(id, vector);
 			}
 		}
 		return size;
@@ -114,13 +115,13 @@ public class CoNLLReader {
 		return ids;
 	}
 
-	private static void readLabEmbed(HashMap<Integer, Matrix> labelRep, HashMap<String, Integer> wordMap,
+	private static void readLabEmbed(HashMap<Integer, float[][]> labelRep, HashMap<String, Integer> wordMap,
 			HashMap<Integer, Integer> labels, String file, BufferedReader reader, int e1, int e2, String filepath)
 			throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 		HashMap<String, String[]> labelToLabel = createLabelToLabel(filepath + "/labels");
 		String line;
-		double[][] mat = new double[e1][e2];
+		float[][] mat = new float[e1][e2];
 		reader = new BufferedReader(new FileReader(file));
 		int row = 0;
 		int[] ids = new int[] {};
@@ -131,19 +132,28 @@ public class CoNLLReader {
 				label = spl[0].toUpperCase();
 				ids = getLabelId(label, labelToLabel, wordMap, labels);
 				row = 0;
-				mat = new double[e1][e2];
+				mat = new float[e1][e2];
 			} else if (spl.length > 1) {
 				for (int i = 0; i < e2; i++) {
-					mat[row][i] = Double.parseDouble(spl[i]);
+					mat[row][i] =Float.parseFloat(spl[i]);
 				}
 				row++;
 				if (row == e1 && ids.length != 0) {
 					for (int id : ids) {
 						if (!labelRep.containsKey(id)) {
-							labelRep.put(id, new Matrix(mat));
+							float[][] newMat = new float[e1][e2];
+							for (int ii=0;ii<e1;ii++)
+								for (int jj=0;jj<e2;jj++)
+									newMat[ii][jj] = mat[ii][jj];
+							labelRep.put(id,newMat);
 							hittedl++;
 						} else {
-							labelRep.put(id, labelRep.get(id).plus(new Matrix(mat)));
+							float[][] oldMat = labelRep.get(id);
+							float[][] newMat = new float[e1][e2];
+							for (int ii=0;ii<e1;ii++)
+								for (int jj=0;jj<e2;jj++)
+									newMat[ii][jj] = mat[ii][jj]+oldMat[ii][jj];
+							labelRep.put(id, newMat);
 						}
 					}
 				}
@@ -184,9 +194,9 @@ public class CoNLLReader {
 		HashMap<Integer, Integer> cluster4Map = new HashMap<Integer, Integer>();
 		HashMap<Integer, Integer> cluster6Map = new HashMap<Integer, Integer>();
 
-		HashMap<Integer, Matrix> labelRep = new HashMap<Integer, Matrix>();
-		HashMap<Integer, Matrix> wordRep = new HashMap<Integer, Matrix>();
-		HashMap<Integer, Matrix> contRep = new HashMap<Integer, Matrix>();
+		HashMap<Integer, float[][]> labelRep = new HashMap<Integer, float[][]>();
+		HashMap<Integer, float[]> wordRep = new HashMap<Integer, float[]>();
+		HashMap<Integer, float[]> contRep = new HashMap<Integer, float[]>();
 		CoNLLReader.lowercased = lowercased;
 		int labelCount = 1;
 		String rootString = "ROOT";

@@ -37,19 +37,6 @@ public class MyTest {
 		String[] sv = s.split("[\t ]");
 		for (int i = 0; i < sv.length; i++)
 			System.out.println("" + i + ":" + sv[i]);
-		Options options = new Options();
-		options.inputFile = "../data/train.dep";
-		options.devPath = "../data/dev.dep  ";
-		options.modelFile = "../data/model/test";
-		options.changePunc("punc_files/wsj.puncs");
-		options.repPath = "../data";
-		options.trainingIter = 3;
-		options.train = true;
-		options.beamWidth = 4;
-		options.useDynamicOracle = false;
-		options.labeled = true;
-		options.useMaxViol = false;
-		options.numOfThreads = 2;
 		// options.useExtendedFeatures = false;
 
 		// ArrayList<Options> optionList =
@@ -57,7 +44,7 @@ public class MyTest {
 		// options.numOfThreads = 2;
 		// for (Options o : optionList)
 		// testOption(options);
-		int length = 10000;
+		int length = 10;
 		int size = 300;
 		double[][] v1 = new double[1][size];
 		double[][] m = new double[size][size];
@@ -71,13 +58,13 @@ public class MyTest {
 		FloatMatrix bm = new DoubleMatrix(m).toFloat();
 		FloatMatrix b1 = new DoubleMatrix(v1).toFloat();
 		FloatMatrix b2 = new DoubleMatrix(v2).toFloat();
-
 		Matrix jm = new Matrix(m);
 		Matrix j1 = new Matrix(v1);
 		Matrix j2 = new Matrix(v2);
 
-		final long startTime = System.currentTimeMillis();
 		float k=0f;
+		final long startTime = System.currentTimeMillis();
+		k=0f;
 		for (int i = 0; i < length; i++) {
 			// float k =bm.mulRowVector(b1).mulColumnVector(b2).get(0);
 	k	 = b1.mmul(bm).mmul(b2).get(0);
@@ -91,11 +78,11 @@ public class MyTest {
 			 k = 0f;
 			 for (int j =0;j<size;j++)
 				 for (int l =0;l<size;l++)
-					 k
+					 k += m[j][l]*v1[0][j]*v2[l][0];
 		}
 		final long endTime1 = System.currentTimeMillis();
 
-		System.out.println("Total execution time jmax: " + (endTime1 - startTime1)+" "+k);
+		System.out.println("Total execution time java: " + (endTime1 - startTime1)+" "+k);
 
 		
 		final long startTime2 = System.currentTimeMillis();

@@ -44,9 +44,9 @@ public class ArcEagerBeamTrainer {
     private String updateMode;
     private AveragedPerceptron classifier;
 
-	private HashMap<Integer, Matrix> wordRep;
-    private HashMap<Integer, Matrix> contRep;
-    private HashMap<Integer, Matrix> labelRep;
+	private HashMap<Integer, float[]> wordRep;
+    private HashMap<Integer, float[]> contRep;
+    private HashMap<Integer, float[][]> labelRep;
     private ArrayList<Integer> dependencyRelations;
     private int featureLength;
     private Random randGen;

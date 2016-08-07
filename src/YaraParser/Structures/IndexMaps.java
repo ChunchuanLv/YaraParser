@@ -20,28 +20,28 @@ public class IndexMaps implements Serializable {
     private HashMap<Integer, Integer> brown6Clusters;
     private HashMap<String, Integer> brownFullClusters;
 	private  HashMap<Integer,Float> wdp ;
-    public HashMap<Integer, Matrix> getLabelRep() {
+    public HashMap<Integer, float[][]> getLabelRep() {
 		return labelRep;
 	}
 
 	public HashMap<Integer, Float>  fastCompute () {
 		return wdp;
 	}
-	public HashMap<Integer, Matrix> getWordRep() {
+	public HashMap<Integer, float[]> getWordRep() {
 		return wordRep;
 	}
 
-	public HashMap<Integer, Matrix> getContRep() {
+	public HashMap<Integer, float[]> getContRep() {
 		return contRep;
 	}
 
-	private HashMap<Integer, Matrix> wordRep;
-    private HashMap<Integer, Matrix> contRep;
-    private HashMap<Integer, Matrix> labelRep;
+	private HashMap<Integer, float[]> wordRep;
+    private HashMap<Integer, float[]> contRep;
+    private HashMap<Integer, float[][]> labelRep;
 
     public IndexMaps(HashMap<String, Integer> wordMap, HashMap<Integer, Integer> labels, String rootString,
                      HashMap<Integer, Integer> brown4Clusters, HashMap<Integer, Integer> brown6Clusters, HashMap<String, Integer> brownFullClusters,
-                     HashMap<Integer, Matrix> wordRep,    HashMap<Integer, Matrix>  contRep,HashMap<Integer, Matrix> labelRep,
+                     HashMap<Integer, float[]> wordRep,    HashMap<Integer, float[]>  contRep,HashMap<Integer, float[][]> labelRep,
                      HashMap<Integer,Float> wdp) {
         this.wordMap = wordMap;
         this.labels = labels;
