@@ -6,6 +6,7 @@
 package YaraParser.Structures;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,12 +20,12 @@ public class IndexMaps implements Serializable {
     private HashMap<Integer, Integer> brown4Clusters;
     private HashMap<Integer, Integer> brown6Clusters;
     private HashMap<String, Integer> brownFullClusters;
-	private  HashMap<Integer,Float> wdp ;
+	private  HashMap<BigInteger,Float> wdp ;
     public HashMap<Integer, float[][]> getLabelRep() {
 		return labelRep;
 	}
 
-	public HashMap<Integer, Float>  fastCompute () {
+	public HashMap<BigInteger, Float>  fastCompute () {
 		return wdp;
 	}
 	public HashMap<Integer, float[]> getWordRep() {
@@ -42,7 +43,7 @@ public class IndexMaps implements Serializable {
     public IndexMaps(HashMap<String, Integer> wordMap, HashMap<Integer, Integer> labels, String rootString,
                      HashMap<Integer, Integer> brown4Clusters, HashMap<Integer, Integer> brown6Clusters, HashMap<String, Integer> brownFullClusters,
                      HashMap<Integer, float[]> wordRep,    HashMap<Integer, float[]>  contRep,HashMap<Integer, float[][]> labelRep,
-                     HashMap<Integer,Float> wdp) {
+                     HashMap<BigInteger,Float> wdp) {
         this.wordMap = wordMap;
         this.labels = labels;
         this.wordRep = wordRep;

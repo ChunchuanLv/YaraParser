@@ -21,6 +21,7 @@ import YaraParser.TransitionBasedSystem.Trainer.ArcEagerBeamTrainer;
 import java.io.FileOutputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ import java.util.Iterator;
 
 import Jama.Matrix;
 import org.jblas.*;
-
+import java.math.BigInteger;
 public class MyTest {
 
 	public static void main(String[] args) throws Exception {
@@ -93,21 +94,22 @@ public class MyTest {
 
 		System.out.println("Total execution time jmax: " + (endTime2 - startTime2)+" "+k);
 
-		
+		hash(36056,32568,23);
+		hash(36056,32568,232);
 		System.exit(0);
 	}
 
-	private static ByteBuffer hash(int x, int y, int z) {
+	private static ByteBuffer hash(int x, int y, int z) throws UnsupportedEncodingException {
 
 		ByteBuffer key = ByteBuffer.allocate(10);
 		key.putInt(x);
 		key.putInt(y);
 		key.putShort((short) z);
-
 		System.out.println("this key:" + key);
 		System.out.println("this x:" + key.getInt(0));
 		System.out.println("this y:" + key.getInt(4));
 		System.out.println("this z:" + key.getShort(8));
+		System.out.println(	new BigInteger(key.array()));
 		return key;
 	}
 

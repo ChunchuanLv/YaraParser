@@ -10,6 +10,7 @@ import YaraParser.Structures.IndexMaps;
 import YaraParser.Structures.InfStruct;
 import YaraParser.TransitionBasedSystem.Parser.Actions;
 
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
@@ -365,7 +366,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		return result ;
 	}
 
-	private  HashMap<Integer,Float> wdp ;
+	private  HashMap<BigInteger,Float> wdp ;
 	private float getCostDep(int word, int head, int dep) {
 
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {
@@ -375,7 +376,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		key.putInt(word);
 		key.putInt(head);
 		key.putShort((short) dep);
-		int code = key.hashCode();
+		BigInteger code = new BigInteger(key.array());
 		if (wdp.containsKey(code)) {
 		//	System.out.println("contrain:"+key);
 			System.out.println(word+" "+head+" "+ dep+" "+code);
@@ -402,7 +403,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		float[] results = new float[deps];
 		int[] indexes = new int[deps];
 		int n = 0;
-		int[] hash = new int[deps];
+		BigInteger[] hash = new BigInteger[deps];
 		for (int d =depS;d<depE;d++) {
 
 			if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(d)) {
@@ -416,10 +417,10 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 			key.putShort((short) d);
 			if (wdp.containsKey(key)) {
 			//	System.out.println("contrain:"+key);
-				results[d-deps]  = wdp.get(key.hashCode());
+				results[d-deps]  = wdp.get(new BigInteger(key.array()));
 			} else {
 			indexes[n++] = d-depS;
-			hash[n] = key.hashCode();
+			hash[n] = new BigInteger(key.array());
 			}
 		}
 		float[] tmp = new float[n];

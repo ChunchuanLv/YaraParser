@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -301,7 +302,7 @@ public class CoNLLReader {
 			System.out.println( contRep.size()+"  cSize:hitted  "+hittedC);
 		}
 		return new IndexMaps(wordMap, labels, rootString, cluster4Map, cluster6Map, clusterMap, wordRep, contRep,
-				labelRep, new HashMap<Integer,Float>());
+				labelRep, new HashMap<BigInteger,Float>());
 	}
 
 	/**
