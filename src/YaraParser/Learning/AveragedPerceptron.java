@@ -375,9 +375,10 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		key.putInt(word);
 		key.putInt(head);
 		key.putShort((short) dep);
-		if (wdp.containsKey(key)) {
+		int code = key.hashCode();
+		if (wdp.containsKey(code)) {
 		//	System.out.println("contrain:"+key);
-			return wdp.get(key);
+			return wdp.get(code);
 		}
 
 		float[] v1 =  wordRep.get(word);
@@ -396,9 +397,50 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 	
 
 	private float[] getCostDep(int word, int head, int depS, int depE) {
-		float[] result = new float[depE-depS];
-	//	System.out.println("word,head,label ,result "+word+" "+head+" "+dep+" "+result);
-		return  result;
+		int deps = depS-depE;
+		float[] results = new float[deps];
+		int[] indexes = new int[deps];
+		int n = 0;
+		int[] hash = new int[deps];
+		for (int d =depS;d<depE;d++) {
+
+			if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(d)) {
+				
+				continue;
+			}
+
+			ByteBuffer key =  ByteBuffer.allocate(10);
+			key.putInt(word);
+			key.putInt(head);
+			key.putShort((short) d);
+			if (wdp.containsKey(key)) {
+			//	System.out.println("contrain:"+key);
+				results[d-deps]  = wdp.get(key.hashCode());
+			} else {
+			indexes[n++] = d-depS;
+			hash[n] = key.hashCode();
+			}
+		}
+		float[] tmp = new float[n];
+
+		float[] v1 =  wordRep.get(word);
+		float[] v2 =  contRep.get(head);
+		int size1 = v1.length;
+		int size2 = v2.length;
+		float[][][] m = new float[size1][size2][n];
+		for (int d =depS;d<depE;d++) {
+			float[][] t =	labelRep.get(d);
+			
+		}
+		 for (int i =0;i<size1;i++)
+			 for (int j =0;j<size2;j++)
+				 for (int k =0;k<n;k++)
+				 tmp[k] +=  v1[i]*v2[j]*m[i][j][k];
+		for (int i =0;i<n;i++) {
+			results[indexes[i]] = tmp[i];
+			wdp.put(hash[i],  tmp[i]);
+		}
+		return  results;
 	}
 	
 
