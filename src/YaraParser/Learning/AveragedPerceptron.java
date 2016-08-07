@@ -368,7 +368,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 
 	private  static HashMap<BigInteger,Float> wdp ;
 	private float getCostDep(int word, int head, int dep) {
-
+ assert(wdp!=null);
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {
 			return 0;
 		}
