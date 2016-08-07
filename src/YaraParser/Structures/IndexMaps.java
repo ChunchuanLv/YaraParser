@@ -36,9 +36,9 @@ public class IndexMaps implements Serializable {
 		return contRep;
 	}
 
-	private HashMap<Integer, float[]> wordRep;
-    private HashMap<Integer, float[]> contRep;
-    private HashMap<Integer, float[][]> labelRep;
+	private static HashMap<Integer, float[]> wordRep;
+    private static HashMap<Integer, float[]> contRep;
+    private static HashMap<Integer, float[][]> labelRep;
 
     public IndexMaps(HashMap<String, Integer> wordMap, HashMap<Integer, Integer> labels, String rootString,
                      HashMap<Integer, Integer> brown4Clusters, HashMap<Integer, Integer> brown6Clusters, HashMap<String, Integer> brownFullClusters,

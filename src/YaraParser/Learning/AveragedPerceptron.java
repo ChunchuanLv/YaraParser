@@ -128,9 +128,9 @@ public class AveragedPerceptron {
 		wdp = maps.fastCompute();
 	}
 
-	private HashMap<Integer, float[]> wordRep;
-    private HashMap<Integer,  float[]> contRep;
-    private HashMap<Integer,  float[][]> labelRep;
+	private static HashMap<Integer, float[]> wordRep;
+    private static HashMap<Integer,  float[]> contRep;
+    private static HashMap<Integer,  float[][]> labelRep;
     
 	private AveragedPerceptron(InfStruct infStruct) {
 		this(infStruct.shiftFeatureAveragedWeights, infStruct.reduceFeatureAveragedWeights,
