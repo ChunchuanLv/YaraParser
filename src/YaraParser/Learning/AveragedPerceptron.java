@@ -378,6 +378,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		int code = key.hashCode();
 		if (wdp.containsKey(code)) {
 		//	System.out.println("contrain:"+key);
+			System.out.println(word+" "+head+" "+ dep+" "+code);
 			return wdp.get(code);
 		}
 
@@ -390,7 +391,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		 for (int i =0;i<size1;i++)
 			 for (int j =0;j<size2;j++)
 				 result +=  v1[i]*v2[j]*m[i][j];
-		wdp.put(key.hashCode(), result);
+		wdp.put(code, result);
 	//	System.out.println("word,head,label ,result "+word+" "+head+" "+dep+" "+result);
 		return  result;
 	}
