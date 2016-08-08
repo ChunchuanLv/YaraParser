@@ -267,8 +267,8 @@ public class CoNLLReader {
 				
 				System.out.println(labelRep.size()+" lES: labels  "+ labels.size());
 			}
-			System.out.println( wordRep.size()+"  wSize:hitted  "+hitted);
-			System.out.println( contRep.size()+"  cSize:hitted  "+hittedC);
+			System.out.println( wordRep.size()+"  wSize:words  "+wordMap.size());
+			System.out.println( contRep.size()+"  cSize:words  "+wordMap.size());
 		}
 		return new IndexMaps(wordMap, labels, rootString, cluster4Map, cluster6Map, clusterMap, wordRep, contRep,
 				labelRep, new HashMap<BigInteger,Float>());
