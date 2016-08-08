@@ -58,44 +58,13 @@ public class CoNLLReader {
 				size = spl.length - 1;
 
 				float[] vector  = new float[size];
-				if (!wordMap.containsKey(word)) {
-					wordMap.put(word, wordMap.size());
-				} else {
+				if (wordMap.containsKey(word)) {
 					hitted++;
+					int id = wordMap.get(word);
+					for (int i = 0; i < size; i++)
+						vector[i] = Float.parseFloat(spl[i + 1]);
+					wordRep.put(id, vector);
 				}
-				int id = wordMap.get(word);
-				for (int i = 0; i < size; i++)
-					vector[i] = Float.parseFloat(spl[i + 1]);
-				wordRep.put(id, vector);
-			}
-		}
-		return size;
-	}
-
-	private static int readContextEmbed(HashMap<Integer, 
-			float[]> wordRep, HashMap<String, Integer> wordMap, String file,
-			BufferedReader reader) throws NumberFormatException, IOException {
-		String line;
-		
-		int size = 0;
-		reader = new BufferedReader(new FileReader(file));
-		while ((line = reader.readLine()) != null) {
-			String[] spl = line.split("[\t ]");
-			if (spl.length > 0) {
-				String word = spl[0];
-				if (CoNLLReader.lowercased)
-					word.toLowerCase();
-				size = spl.length - 1;
-				float[] vector  = new float[size];
-				if (!wordMap.containsKey(word)) {
-					wordMap.put(word, wordMap.size());
-				} else {
-					hittedC++;
-				}
-				int id = wordMap.get(word);
-				for (int i = 0; i < size; i++)
-					vector[i] = Float.parseFloat(spl[i + 1]);
-				wordRep.put(id, vector);
 			}
 		}
 		return size;
@@ -292,7 +261,7 @@ public class CoNLLReader {
 
 		if (repPath.length() > 0) {
 			int e1 = readWordEmbed(wordRep, wordMap, repPath + "/" + we, reader);
-			int e2 = readContextEmbed(contRep, wordMap, repPath + "/" + ce, reader);
+			int e2 = readWordEmbed(contRep, wordMap, repPath + "/" + ce, reader);
 			if (depMat) {
 				readLabEmbed(labelRep, wordMap, labels, repPath + "/" + depe, reader, e1, e2, repPath);
 				
