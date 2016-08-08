@@ -147,10 +147,14 @@ public class AveragedPerceptron {
 		leftArcFeatureWeights = infStruct.leftArcFeatureWeights;
 		rightArcFeatureWeights = infStruct.rightArcFeatureWeights;
 		wordRep = maps.getWordRep();
+		System.out.println("wordRep "+wordRep.size());
 		contRep = maps.getContRep();
+		System.out.println("contRep "+contRep.size());
 		labelRep =maps.getLabelRep();
+		System.out.println("labelRep "+labelRep.size());
 		depMat = labelRep == null ||labelRep.size() >0;
 		wdp = maps.fastCompute();
+		System.out.println("wdp "+wdp.size());
 	}
 
 	public float changeWeight(Actions actionType, int slotNum, Object featureName, int labelIndex, float change) {
