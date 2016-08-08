@@ -142,6 +142,10 @@ public class AveragedPerceptron {
 	public AveragedPerceptron(InfStruct infStruct, IndexMaps maps) {
 		// TODO Auto-generated constructor stub
 		this(infStruct);
+		shiftFeatureWeights = infStruct.shiftFeatureWeights;
+		reduceFeatureWeights = infStruct.reduceFeatureWeights;
+		leftArcFeatureWeights = infStruct.leftArcFeatureWeights;
+		rightArcFeatureWeights = infStruct.rightArcFeatureWeights;
 		wordRep = maps.getWordRep();
 		contRep = maps.getContRep();
 		labelRep =maps.getLabelRep();

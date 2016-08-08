@@ -22,6 +22,10 @@ public class InfStruct {
     public HashMap<Object, Float>[] reduceFeatureAveragedWeights;
     public HashMap<Object, CompactArray>[] leftArcFeatureAveragedWeights;
     public HashMap<Object, CompactArray>[] rightArcFeatureAveragedWeights;
+	public HashMap<Object, Float>[] shiftFeatureWeights;
+	public HashMap<Object, Float>[] reduceFeatureWeights;
+	public HashMap<Object, CompactArray>[] leftArcFeatureWeights;
+	public HashMap<Object, CompactArray>[] rightArcFeatureWeights;
     public int dependencySize;
 
     public IndexMaps maps;
@@ -34,6 +38,12 @@ public class InfStruct {
         this.reduceFeatureAveragedWeights = reduceFeatureAveragedWeights;
         this.leftArcFeatureAveragedWeights = leftArcFeatureAveragedWeights;
         this.rightArcFeatureAveragedWeights = rightArcFeatureAveragedWeights;
+        
+    	this.shiftFeatureWeights =shiftFeatureAveragedWeights;  
+        this.reduceFeatureWeights = reduceFeatureAveragedWeights;
+        this.leftArcFeatureWeights = leftArcFeatureAveragedWeights;
+        this.rightArcFeatureWeights = rightArcFeatureAveragedWeights;
+        
         this.maps = maps;
         this.dependencyLabels = dependencyLabels;
         this.options = options;
@@ -41,6 +51,12 @@ public class InfStruct {
     }
 
     public InfStruct(AveragedPerceptron perceptron, IndexMaps maps, ArrayList<Integer> dependencyLabels, Options options) {
+    	this.shiftFeatureWeights = perceptron.shiftFeatureWeights;      	
+        this.reduceFeatureWeights = perceptron.reduceFeatureWeights;
+        this.leftArcFeatureWeights = perceptron.leftArcFeatureWeights;
+        this.rightArcFeatureWeights = perceptron.rightArcFeatureWeights;
+    	
+    	
         shiftFeatureAveragedWeights = new HashMap[perceptron.shiftFeatureAveragedWeights.length];
         reduceFeatureAveragedWeights = new HashMap[perceptron.reduceFeatureAveragedWeights.length];
 
@@ -115,6 +131,10 @@ public class InfStruct {
         reduceFeatureAveragedWeights = (HashMap<Object, Float>[]) reader.readObject();
         leftArcFeatureAveragedWeights = (HashMap<Object, CompactArray>[]) reader.readObject();
         rightArcFeatureAveragedWeights = (HashMap<Object, CompactArray>[]) reader.readObject();
+        shiftFeatureWeights = (HashMap<Object, Float>[]) reader.readObject();
+        reduceFeatureWeights = (HashMap<Object, Float>[]) reader.readObject();
+        leftArcFeatureWeights = (HashMap<Object, CompactArray>[]) reader.readObject();
+        rightArcFeatureWeights = (HashMap<Object, CompactArray>[]) reader.readObject();
         dependencySize = reader.readInt();
     }
 
@@ -130,6 +150,10 @@ public class InfStruct {
         writer.writeObject(reduceFeatureAveragedWeights);
         writer.writeObject(leftArcFeatureAveragedWeights);
         writer.writeObject(rightArcFeatureAveragedWeights);
+        writer.writeObject(shiftFeatureWeights);
+        writer.writeObject(reduceFeatureWeights);
+        writer.writeObject(leftArcFeatureWeights);
+        writer.writeObject(rightArcFeatureWeights);
         writer.writeInt(dependencySize);
         writer.close();
     }
