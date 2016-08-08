@@ -558,7 +558,6 @@ public class ArcEagerBeamTrainer {
                         	 int   dependency = action - 3;
                         	change = classifier.getVecCost(feats,classifier.rightArcFeatureWeights,false, dependency) ;
                         }
-                    	System.out.println("oracle: "+change);
                     }
         		     if (value == null)
                         map.put(featName, change);
