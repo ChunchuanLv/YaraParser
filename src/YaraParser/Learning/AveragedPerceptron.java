@@ -367,8 +367,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 	}
 
 	private  static HashMap<BigInteger,Float> wdp ;
-	private float getCostDep(int word, int head, int dep) {
- assert(wdp!=null);
+	private  float getCostDep(int word, int head, int dep) {
 		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {
 			return 0;
 		}
@@ -377,12 +376,13 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		key.putInt(head);
 		key.putShort((short) dep);
 		BigInteger code = new BigInteger(key.array());
+		synchronized(wdp) {
 		if (wdp.containsKey(code)) {
 		//	System.out.println("contrain:"+key);
 	//		System.out.println(wdp.size()+" "+word+" "+head+" "+ dep+" "+code);
 			return wdp.get(code);
 		}
-
+		}
 		float[] v1 =  wordRep.get(word);
 		float[] v2 =  contRep.get(head);
 		float[][] m = labelRep.get(dep);
@@ -392,7 +392,9 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 		 for (int i =0;i<size1;i++)
 			 for (int j =0;j<size2;j++)
 				 result +=  v1[i]*v2[j]*m[i][j];
+			synchronized(wdp) {
 		wdp.put(code, result);
+			}
 	//	System.out.println("word,head,label ,result "+word+" "+head+" "+dep+" "+result);
 		return  result;
 	}
