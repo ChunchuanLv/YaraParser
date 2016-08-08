@@ -194,7 +194,7 @@ public class AveragedPerceptron {
 	}
 
 	public float changeWeight(Actions actionType, int slotNum, Object featureName, int labelIndex, float change,Object[] features) {
-		if (!dep || slotNum!=depIndex) return changeWeight(actionType,slotNum,featureName,labelIndex,change); 
+		if (true||!dep || slotNum!=depIndex) return changeWeight(actionType,slotNum,featureName,labelIndex,change); 
 		if (actionType == Actions.RightArc) {
 			if (getVecCost(features,rightArcFeatureWeights,false,labelIndex)<0) change = -change;
 			changeFeatureWeight(rightArcFeatureWeights[slotNum], rightArcFeatureAveragedWeights[slotNum], featureName,
@@ -352,10 +352,9 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 			float[] weightVector = values.getArray();
 			if ( offset<= d &&d< offset + weightVector.length)
 			if (depMat)
-					scores= weightVector[d - offset] * getCostDep(word, head, d);
+				return getCostDep(word, head, d);
 			else {
-				float cost = getCost(word, head);
-					scores = weightVector[d - offset] * cost;
+				return getCost(word, head);
 			}
 		}
 	}
