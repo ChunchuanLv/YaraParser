@@ -64,6 +64,13 @@ public class CoNLLReader {
 					for (int i = 0; i < size; i++)
 						vector[i] = Float.parseFloat(spl[i + 1]);
 					wordRep.put(id, vector);
+				}else
+				{
+					wordMap.put(word, wordMap.size());
+					int id = wordMap.get(word);
+					for (int i = 0; i < size; i++)
+						vector[i] = Float.parseFloat(spl[i + 1]);
+					wordRep.put(id, vector);
 				}
 			}
 		}

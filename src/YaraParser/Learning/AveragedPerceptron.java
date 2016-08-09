@@ -193,19 +193,6 @@ public class AveragedPerceptron {
 		return change;
 	}
 
-	public float changeWeight(Actions actionType, int slotNum, Object featureName, int labelIndex, float change,Object[] features) {
-		if (true||!dep || slotNum!=depIndex) return changeWeight(actionType,slotNum,featureName,labelIndex,change); 
-		if (actionType == Actions.RightArc) {
-			if (getVecCost(features,rightArcFeatureWeights,false,labelIndex)<0) change = -change;
-			changeFeatureWeight(rightArcFeatureWeights[slotNum], rightArcFeatureAveragedWeights[slotNum], featureName,
-					labelIndex, change, dependencySize);
-		} else if (actionType == Actions.LeftArc) {
-			if (getVecCost(features,leftArcFeatureWeights,true,labelIndex)<0) change = -change;
-			changeFeatureWeight(leftArcFeatureWeights[slotNum], leftArcFeatureAveragedWeights[slotNum], featureName,
-					labelIndex, change, dependencySize);
-		}
-		return change;
-	}
 
 	public void changeFeatureWeight(HashMap<Object, CompactArray> map, HashMap<Object, CompactArray> aMap,
 			Object featureName, int labelIndex, float change, int size) {
