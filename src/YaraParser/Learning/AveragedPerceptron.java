@@ -220,15 +220,6 @@ public class AveragedPerceptron {
 		iteration++;
 	}
 
-	private float featureToDouble(Object value) {
-		float r = (float) 1.0;
-		if ((value instanceof Byte) || (value instanceof Short) || (value instanceof Integer) || (value instanceof Long)
-				|| (value instanceof Float) || (value instanceof Double)) {
-			r = (float) value;
-		}
-		return r;
-	}
-
 	public float shiftScore(final Object[] features, boolean decode) {
 		float score = 0.0f;
 
@@ -319,7 +310,7 @@ public float[] getVecCost(final Object[] features,HashMap<Object, CompactArray>[
 }
 
 
-public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[]  map,boolean left,int d) {
+public float getFeature(final Object[] features,HashMap<Object, CompactArray>[]  map,boolean left,int d) {
 	float scores = 0;
 	if (dep) {
 		if (features[1]==null||features[4]==null) return scores;
@@ -341,7 +332,7 @@ public float getVecCost(final Object[] features,HashMap<Object, CompactArray>[] 
 			if (depMat)
 				return getCostDep(word, head, d);
 			else {
-				return getCost(word, head);
+				return weightVector[d - offset]*getCost(word, head);
 			}
 		}
 	}

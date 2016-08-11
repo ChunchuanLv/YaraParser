@@ -553,10 +553,10 @@ public class ArcEagerBeamTrainer {
                     if (dep&&f==depIndex) {
                     	if (action >= (3 + dependencyRelations.size())) {
                     		 int  dependency = action - (3 + dependencyRelations.size());
-                        	change = classifier.getVecCost(feats,classifier.leftArcFeatureWeights,true, dependency) ;
+                        	change = classifier.getFeature(feats,classifier.leftArcFeatureWeights,true, dependency) ;
                         } else if (action >= 3) {
                         	 int   dependency = action - 3;
-                        	change = classifier.getVecCost(feats,classifier.rightArcFeatureWeights,false, dependency) ;
+                        	change = classifier.getFeature(feats,classifier.rightArcFeatureWeights,false, dependency) ;
                         }
                     }
         		     if (value == null)
@@ -604,10 +604,10 @@ public class ArcEagerBeamTrainer {
                         if (dep&&f==depIndex) {
                         	if (action >= (3 + dependencyRelations.size())) {
                         		 int  dependency = action - (3 + dependencyRelations.size());
-                            	change = classifier.getVecCost(feats,classifier.leftArcFeatureWeights,true, dependency) ;
+                            	change = classifier.getFeature(feats,classifier.leftArcFeatureWeights,true, dependency) ;
                             } else if (action >= 3) {
                             	 int   dependency = action - 3;
-                            	change = classifier.getVecCost(feats,classifier.rightArcFeatureWeights,false, dependency) ;
+                            	change = classifier.getFeature(feats,classifier.rightArcFeatureWeights,false, dependency) ;
                             }
                         }
             		     if (value == null)
