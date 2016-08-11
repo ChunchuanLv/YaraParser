@@ -73,7 +73,7 @@ public class ArcEagerBeamTrainer {
 		depMat = labelRep == null ||labelRep.size() >0;
     }
 
-    public void train(ArrayList<GoldConfiguration> trainData, String devPath, int maxIteration, String modelPath, boolean lowerCased, HashSet<String> punctuations, int partialTreeIter) throws Exception {
+    public void train(ArrayList<GoldConfiguration> trainData, String devPath, int maxIteration, String modelPath, boolean lowerCased, HashSet<String> punctuations, int partialTreeIter,String testPath) throws Exception {
         /**
          * Actions: 0=shift, 1=reduce, 2=unshift, ra_dep=3+dep, la_dep=3+dependencyRelations.size()+dep
          */
@@ -131,6 +131,34 @@ public class ArcEagerBeamTrainer {
                }
                 parser.shutDownLiveThreads();
             }
+            
+            if (!testPath.equals("")) {
+                AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct,maps);
+
+                int raSize = averagedPerceptron.raSize();
+                int effectiveRaSize = averagedPerceptron.effectiveRaSize();
+                float raRatio = 100.0f * effectiveRaSize / raSize;
+
+                int laSize = averagedPerceptron.laSize();
+                int effectiveLaSize = averagedPerceptron.effectiveLaSize();
+                float laRatio = 100.0f * effectiveLaSize / laSize;
+
+                DecimalFormat format = new DecimalFormat("##.00");
+                System.out.println("size of RA features in memory:" + effectiveRaSize + "/" + raSize + "->" + format.format(raRatio) + "%");
+                System.out.println("size of LA features in memory:" + effectiveLaSize + "/" + laSize + "->" + format.format(laRatio) + "%");
+                KBeamArcEagerParser parser = new KBeamArcEagerParser(averagedPerceptron, dependencyRelations, featureLength, maps, options.numOfThreads,options.repPath=="",options.depMat);
+
+                parser.parseConllFile(testPath, modelPath + ".__tmp__",
+                        options.rootFirst, options.beamWidth, true, lowerCased, options.numOfThreads, false, "");
+               double accuracy= Evaluator.evaluate(testPath, modelPath + ".__tmp__", punctuations);
+               if (accuracy >accuracyOndev) {
+            	   accuracyOndev = accuracy;
+                   infStruct.saveModel(modelPath + "_best" );
+                   System.out.println("best iter_"+i);
+               }
+                parser.shutDownLiveThreads();
+            }
+            
         }
         boolean isTerminated = executor.isTerminated();
         while (!isTerminated) {

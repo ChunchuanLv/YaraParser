@@ -104,7 +104,7 @@ public class YaraParser {
 				ArcEagerBeamTrainer trainer = new ArcEagerBeamTrainer(options.useMaxViol ? "max_violation" : "early",
 						averagedPerceptron, options, dependencyLabels, featureSize, maps);
 				trainer.train(dataSet, options.devPath, options.trainingIter, options.modelFile, options.lowercase,
-						options.punctuations, options.partialTrainingStartingIteration);
+						options.punctuations, options.partialTrainingStartingIteration,options.inputFile);
 
 			} else {
 
@@ -150,7 +150,7 @@ public class YaraParser {
 				ArcEagerBeamTrainer trainer = new ArcEagerBeamTrainer(options.useMaxViol ? "max_violation" : "early",
 						averagedPerceptron, options, dependencyLabels, featureLength, maps);
 				trainer.train(dataSet, options.devPath, options.trainingIter, options.modelFile, options.lowercase,
-						options.punctuations, options.partialTrainingStartingIteration);
+						options.punctuations, options.partialTrainingStartingIteration,options.inputFile);
 			}
 		}
 	}
