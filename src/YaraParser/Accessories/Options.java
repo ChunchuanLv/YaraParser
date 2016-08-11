@@ -22,6 +22,7 @@ public class Options implements Serializable {
     public String inputFile;
     public String outputFile;
     public String devPath;
+    public String testPath;
     public int trainingIter;
     public boolean evaluate;
     public boolean parsePartialConll;
@@ -68,6 +69,7 @@ public class Options implements Serializable {
         outputFile = "";
         inputFile = "";
         devPath = "";
+        testPath = "";
         scorePath = "";
         separator = "_";
         clusterFile = "";
@@ -194,6 +196,8 @@ public class Options implements Serializable {
                 options.modelFile = args[i + 1];
             else if (args[i].startsWith("-dev"))
                 options.devPath = args[i + 1];
+            else if (args[i].startsWith("-test"))
+                options.testPath = args[i + 1];
             else if (args[i].equals("-gold"))
                 options.goldFile = args[i + 1];
             else if (args[i].startsWith("-parse"))
