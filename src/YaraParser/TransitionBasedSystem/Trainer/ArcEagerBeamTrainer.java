@@ -133,6 +133,7 @@ public class ArcEagerBeamTrainer {
             }
             
             if (!testPath.equals("")) {
+            	System.out.println("Testing file");
                 AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct,maps);
 
                 int raSize = averagedPerceptron.raSize();
@@ -143,19 +144,12 @@ public class ArcEagerBeamTrainer {
                 int effectiveLaSize = averagedPerceptron.effectiveLaSize();
                 float laRatio = 100.0f * effectiveLaSize / laSize;
 
-                DecimalFormat format = new DecimalFormat("##.00");
-                System.out.println("size of RA features in memory:" + effectiveRaSize + "/" + raSize + "->" + format.format(raRatio) + "%");
-                System.out.println("size of LA features in memory:" + effectiveLaSize + "/" + laSize + "->" + format.format(laRatio) + "%");
-                KBeamArcEagerParser parser = new KBeamArcEagerParser(averagedPerceptron, dependencyRelations, featureLength, maps, options.numOfThreads,options.repPath=="",options.depMat);
+               KBeamArcEagerParser parser = new KBeamArcEagerParser(averagedPerceptron, dependencyRelations, featureLength, maps, options.numOfThreads,options.repPath=="",options.depMat);
 
                 parser.parseConllFile(testPath, modelPath + ".__tmp__",
                         options.rootFirst, options.beamWidth, true, lowerCased, options.numOfThreads, false, "");
                double accuracy= Evaluator.evaluate(testPath, modelPath + ".__tmp__", punctuations);
-               if (accuracy >accuracyOndev) {
-            	   accuracyOndev = accuracy;
-                   infStruct.saveModel(modelPath + "_best" );
-                   System.out.println("best iter_"+i);
-               }
+             
                 parser.shutDownLiveThreads();
             }
             
