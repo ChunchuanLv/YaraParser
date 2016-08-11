@@ -332,7 +332,7 @@ public float getFeature(final Object[] features,HashMap<Object, CompactArray>[] 
 			if (depMat)
 				return getCostDep(word, head, d);
 			else {
-				return weightVector[d - offset]*getCost(word, head);
+				return getCost(word, head);
 			}
 		}
 	}
