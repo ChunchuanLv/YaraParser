@@ -393,6 +393,7 @@ public float getFeature(final Object[] features,HashMap<Object, CompactArray>[] 
 		 for (int i =0;i<size1;i++)
 			 for (int j =0;j<size2;j++)
 				 result +=  v1[i]*v2[j]*m[i][j];
+		 result = (float) Math.tanh(result);
 			synchronized(wdp) {
 		wdp.put(code, result);
 			}
