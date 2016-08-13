@@ -67,7 +67,7 @@ public class AveragedPerceptron {
 			break;
 		case 73:
 			dep = true;
-			depMat = (((long) features[72] )== 1L);
+			depMat = (((long) features[72]) == 1L);
 			depIndex = 72;
 			break;
 		case 154:
@@ -122,22 +122,21 @@ public class AveragedPerceptron {
 		this(featSize, dependencySize);
 		wordRep = maps.getWordRep();
 		contRep = maps.getContRep();
-		labelRep =maps.getLabelRep();
-		depMat = labelRep == null ||labelRep.size() >0;
+		labelRep = maps.getLabelRep();
+		depMat = labelRep == null || labelRep.size() > 0;
 		dep = (featSize == 27) || (featSize == 73) || (featSize == 154);
 		wdp = maps.fastCompute();
 	}
 
 	private static HashMap<Integer, float[]> wordRep;
-    private static HashMap<Integer,  float[]> contRep;
-    private static HashMap<Integer,  float[][]> labelRep;
-    
+	private static HashMap<Integer, float[]> contRep;
+	private static HashMap<Integer, float[][]> labelRep;
+
 	private AveragedPerceptron(InfStruct infStruct) {
 		this(infStruct.shiftFeatureAveragedWeights, infStruct.reduceFeatureAveragedWeights,
 				infStruct.leftArcFeatureAveragedWeights, infStruct.rightArcFeatureAveragedWeights,
 				infStruct.dependencySize);
 	}
-
 
 	public AveragedPerceptron(InfStruct infStruct, IndexMaps maps) {
 		// TODO Auto-generated constructor stub
@@ -147,14 +146,14 @@ public class AveragedPerceptron {
 		leftArcFeatureWeights = infStruct.leftArcFeatureWeights;
 		rightArcFeatureWeights = infStruct.rightArcFeatureWeights;
 		wordRep = maps.getWordRep();
-		System.out.println("wordRep "+wordRep.size());
+		System.out.println("wordRep " + wordRep.size());
 		contRep = maps.getContRep();
-		System.out.println("contRep "+contRep.size());
-		labelRep =maps.getLabelRep();
-		System.out.println("labelRep "+labelRep.size());
-		depMat = labelRep == null ||labelRep.size() >0;
+		System.out.println("contRep " + contRep.size());
+		labelRep = maps.getLabelRep();
+		System.out.println("labelRep " + labelRep.size());
+		depMat = labelRep == null || labelRep.size() > 0;
 		wdp = maps.fastCompute();
-		System.out.println("wdp "+wdp.size());
+		System.out.println("wdp " + wdp.size());
 	}
 
 	public float changeWeight(Actions actionType, int slotNum, Object featureName, int labelIndex, float change) {
@@ -192,7 +191,6 @@ public class AveragedPerceptron {
 
 		return change;
 	}
-
 
 	public void changeFeatureWeight(HashMap<Object, CompactArray> map, HashMap<Object, CompactArray> aMap,
 			Object featureName, int labelIndex, float change, int size) {
@@ -244,7 +242,7 @@ public class AveragedPerceptron {
 		for (int i = 0; i < features.length; i++) {
 			if (features[i] == null || (i >= 26 && i < 32))
 				continue;
-			Float values = map[i].get(features[i]) ;
+			Float values = map[i].get(features[i]);
 			if (values != null) {
 				score += values;
 			}
@@ -271,184 +269,189 @@ public class AveragedPerceptron {
 			}
 		}
 		if (dep) {
-			float[] addScore = getVecCost(features,map,true);
-			for (int i=0; i<addScore.length;i++) scores[i] += addScore[i];
+			float[] addScore = getVecCost(features, map, true);
+			for (int i = 0; i < addScore.length; i++)
+				scores[i] += addScore[i];
 		}
 
 		return scores;
 	}
-public float[] getVecCost(final Object[] features,HashMap<Object, CompactArray>[]  map,boolean left) {
-	float scores[] = new float[dependencySize];
-	if (dep) {
-		if (features[1]==null||features[4]==null) return scores;
-		int head;
-		int word;
-		if (left) {
-		head = (int) (long)features[4] - 2;
-	 word = (int)(long) features[1] - 2;
-		}else
-		{
-			head =  (int) (long)features[1] - 2;
-			word =(int) (long)features[4] - 2; 
-		}
-		CompactArray values = map[depIndex].get(features[depIndex]);
-		if (values != null) {
-			int offset = values.getOffset();
-			float[] weightVector = values.getArray();
-			if (depMat)
-				for (int d = offset; d < offset + weightVector.length; d++)
-					scores[d] = weightVector[d - offset] * getCostDep(word, head, d);
-			else {
-				float cost = getCost(word, head);
-				for (int d = offset; d < offset + weightVector.length; d++)
-					scores[d] = weightVector[d - offset] * cost;
+
+	public float[] getVecCost(final Object[] features, HashMap<Object, CompactArray>[] map, boolean left) {
+		float scores[] = new float[dependencySize];
+		if (dep) {
+			if (features[1] == null || features[4] == null)
+				return scores;
+			int head;
+			int word;
+			if (left) {
+				head = (int) (long) features[4] - 2;
+				word = (int) (long) features[1] - 2;
+			} else {
+				head = (int) (long) features[1] - 2;
+				word = (int) (long) features[4] - 2;
+			}
+			CompactArray values = map[depIndex].get(features[depIndex]);
+			if (values != null) {
+				int offset = values.getOffset();
+				float[] weightVector = values.getArray();
+				if (depMat)
+					for (int d = offset; d < offset + weightVector.length; d++)
+						scores[d] = weightVector[d - offset] * getCostDep(word, head, d);
+				else {
+					float cost = getCost(word, head);
+					for (int d = offset; d < offset + weightVector.length; d++)
+						scores[d] = weightVector[d - offset] * cost;
+				}
 			}
 		}
+
+		return scores;
 	}
-	
-	return scores;
-}
 
-
-public float getFeature(final Object[] features,HashMap<Object, CompactArray>[]  map,boolean left,int d) {
-	float scores = 0;
-	if (dep) {
-		if (features[1]==null||features[4]==null) return scores;
-		int head;
-		int word;
-		if (left) {
-		head = (int) (long)features[4] - 2;
-	 word = (int)(long) features[1] - 2;
-		}else
-		{
-			head =  (int) (long)features[1] - 2;
-			word =(int) (long)features[4] - 2; 
-		}
-		CompactArray values = map[depIndex].get(features[depIndex]);
-		if (values != null) {
-			int offset = values.getOffset();
-			float[] weightVector = values.getArray();
-			if ( offset<= d &&d< offset + weightVector.length)
-			if (depMat)
-				return getCostDep(word, head, d);
-			else {
-				return getCost(word, head);
+	public float getFeature(final Object[] features, HashMap<Object, CompactArray>[] map, boolean left, int d) {
+		float scores = 0;
+		if (dep) {
+			if (features[1] == null || features[4] == null)
+				return scores;
+			int head;
+			int word;
+			if (left) {
+				head = (int) (long) features[4] - 2;
+				word = (int) (long) features[1] - 2;
+			} else {
+				head = (int) (long) features[1] - 2;
+				word = (int) (long) features[4] - 2;
+			}
+			CompactArray values = map[depIndex].get(features[depIndex]);
+			if (values != null) {
+				int offset = values.getOffset();
+				float[] weightVector = values.getArray();
+				if (offset <= d && d < offset + weightVector.length)
+					if (depMat)
+						return getCostDep(word, head, d);
+					else {
+						return getCost(word, head);
+					}
 			}
 		}
+
+		return scores;
 	}
-	
-	return scores;
-}
+
 	private float getCost(int word, int head) {
 
-		if (!wordRep.containsKey(word)||!contRep.containsKey(head)) {
+		if (!wordRep.containsKey(word) || !contRep.containsKey(head)) {
 			return 0;
 		}
-		ByteBuffer key =  ByteBuffer.allocate(8);
+		ByteBuffer key = ByteBuffer.allocate(8);
 		key.putInt(word);
 		key.putInt(head);
 		BigInteger code = new BigInteger(key.array());
-		synchronized(wdp) {
-		if (wdp.containsKey(code)) {
-		//	System.out.println("contrain:"+key);
-	//		System.out.println(wdp.size()+" "+word+" "+head+" "+ dep+" "+code);
-			return wdp.get(code);
+		synchronized (wdp) {
+			if (wdp.containsKey(code)) {
+				// System.out.println("contrain:"+key);
+				// System.out.println(wdp.size()+" "+word+" "+head+" "+ dep+"
+				// "+code);
+				return wdp.get(code);
+			}
 		}
-		}
-		float[] v1 =  wordRep.get(word);
-		float[] v2 =  contRep.get(head);
+		float[] v1 = wordRep.get(word);
+		float[] v2 = contRep.get(head);
 		float result = 0f;
 		int size = v1.length;
-		 for (int i =0;i<size;i++)
-				 result +=  v1[i]*v2[i];
-			synchronized(wdp) {
-		wdp.put(code, result);
-			}
-		return result ;
+		for (int i = 0; i < size; i++)
+			result += v1[i] * v2[i];
+		result = (float) Math.tanh(result);
+		synchronized (wdp) {
+			wdp.put(code, result);
+		}
+		return result;
 	}
 
-	private  static HashMap<BigInteger,Float> wdp ;
-	private  float getCostDep(int word, int head, int dep) {
-		if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(dep)) {
+	private static HashMap<BigInteger, Float> wdp;
+
+	private float getCostDep(int word, int head, int dep) {
+		if (!wordRep.containsKey(word) || !contRep.containsKey(head) || !labelRep.containsKey(dep)) {
 			return 0;
 		}
-		ByteBuffer key =  ByteBuffer.allocate(10);
+		ByteBuffer key = ByteBuffer.allocate(10);
 		key.putInt(word);
 		key.putInt(head);
 		key.putShort((short) dep);
 		BigInteger code = new BigInteger(key.array());
-		synchronized(wdp) {
-		if (wdp.containsKey(code)) {
-		//	System.out.println("contrain:"+key);
-	//		System.out.println(wdp.size()+" "+word+" "+head+" "+ dep+" "+code);
-			return wdp.get(code);
+		synchronized (wdp) {
+			if (wdp.containsKey(code)) {
+				// System.out.println("contrain:"+key);
+				// System.out.println(wdp.size()+" "+word+" "+head+" "+ dep+"
+				// "+code);
+				return wdp.get(code);
+			}
 		}
-		}
-		float[] v1 =  wordRep.get(word);
-		float[] v2 =  contRep.get(head);
+		float[] v1 = wordRep.get(word);
+		float[] v2 = contRep.get(head);
 		float[][] m = labelRep.get(dep);
 		float result = 0f;
 		int size1 = v1.length;
 		int size2 = v2.length;
-		 for (int i =0;i<size1;i++)
-			 for (int j =0;j<size2;j++)
-				 result +=  v1[i]*v2[j]*m[i][j];
-		 result = (float) Math.tanh(result);
-			synchronized(wdp) {
-		wdp.put(code, result);
-			}
-	//	System.out.println("word,head,label ,result "+word+" "+head+" "+dep+" "+result);
-		return  result;
+		for (int i = 0; i < size1; i++)
+			for (int j = 0; j < size2; j++)
+				result += v1[i] * v2[j] * m[i][j];
+		result = (float) Math.tanh(result);
+		synchronized (wdp) {
+			wdp.put(code, result);
+		}
+		// System.out.println("word,head,label ,result "+word+" "+head+" "+dep+"
+		// "+result);
+		return result;
 	}
-	
 
 	private float[] getCostDep(int word, int head, int depS, int depE) {
-		int deps = depS-depE;
+		int deps = depS - depE;
 		float[] results = new float[deps];
 		int[] indexes = new int[deps];
 		int n = 0;
 		BigInteger[] hash = new BigInteger[deps];
-		for (int d =depS;d<depE;d++) {
+		for (int d = depS; d < depE; d++) {
 
-			if (!wordRep.containsKey(word)||!contRep.containsKey(head)||!labelRep.containsKey(d)) {
-				
+			if (!wordRep.containsKey(word) || !contRep.containsKey(head) || !labelRep.containsKey(d)) {
+
 				continue;
 			}
 
-			ByteBuffer key =  ByteBuffer.allocate(10);
+			ByteBuffer key = ByteBuffer.allocate(10);
 			key.putInt(word);
 			key.putInt(head);
 			key.putShort((short) d);
 			if (wdp.containsKey(key)) {
-			//	System.out.println("contrain:"+key);
-				results[d-deps]  = wdp.get(new BigInteger(key.array()));
+				// System.out.println("contrain:"+key);
+				results[d - deps] = wdp.get(new BigInteger(key.array()));
 			} else {
-			indexes[n++] = d-depS;
-			hash[n] = new BigInteger(key.array());
+				indexes[n++] = d - depS;
+				hash[n] = new BigInteger(key.array());
 			}
 		}
 		float[] tmp = new float[n];
 
-		float[] v1 =  wordRep.get(word);
-		float[] v2 =  contRep.get(head);
+		float[] v1 = wordRep.get(word);
+		float[] v2 = contRep.get(head);
 		int size1 = v1.length;
 		int size2 = v2.length;
 		float[][][] m = new float[size1][size2][n];
-		for (int d =depS;d<depE;d++) {
-			float[][] t =	labelRep.get(d);
-			
+		for (int d = depS; d < depE; d++) {
+			float[][] t = labelRep.get(d);
+
 		}
-		 for (int i =0;i<size1;i++)
-			 for (int j =0;j<size2;j++)
-				 for (int k =0;k<n;k++)
-				 tmp[k] +=  v1[i]*v2[j]*m[i][j][k];
-		for (int i =0;i<n;i++) {
+		for (int i = 0; i < size1; i++)
+			for (int j = 0; j < size2; j++)
+				for (int k = 0; k < n; k++)
+					tmp[k] += v1[i] * v2[j] * m[i][j][k];
+		for (int i = 0; i < n; i++) {
 			results[indexes[i]] = tmp[i];
-			wdp.put(hash[i],  tmp[i]);
+			wdp.put(hash[i], tmp[i]);
 		}
-		return  results;
+		return results;
 	}
-	
 
 	public float[] rightArcScores(final Object[] features, boolean decode) {
 		float scores[] = new float[dependencySize];
@@ -470,8 +473,9 @@ public float getFeature(final Object[] features,HashMap<Object, CompactArray>[] 
 		}
 
 		if (dep) {
-			float[] addScore = getVecCost(features,map,false);
-			for (int i=0; i<addScore.length;i++) scores[i] += addScore[i];
+			float[] addScore = getVecCost(features, map, false);
+			for (int i = 0; i < addScore.length; i++)
+				scores[i] += addScore[i];
 		}
 		return scores;
 	}
