@@ -101,7 +101,7 @@ public class ArcEagerBeamTrainer {
 
             System.out.print("saving the model...");
             InfStruct infStruct = new InfStruct(classifier, maps, dependencyRelations, options);
-            infStruct.saveModel(modelPath + "_iter" + i);
+          //  infStruct.saveModel(modelPath + "_iter" + i);
 
             System.out.println("done\n");
 
