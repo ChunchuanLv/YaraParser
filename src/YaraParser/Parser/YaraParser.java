@@ -146,7 +146,7 @@ public class YaraParser {
 					}
 				}
 				AveragedPerceptron averagedPerceptron = new AveragedPerceptron(featureLength, dependencyLabels.size(),
-						maps);
+						maps,options.tanh);
 				ArcEagerBeamTrainer trainer = new ArcEagerBeamTrainer(options.useMaxViol ? "max_violation" : "early",
 						averagedPerceptron, options, dependencyLabels, featureLength, maps);
 				trainer.train(dataSet, options.devPath, options.trainingIter, options.modelFile, options.lowercase,

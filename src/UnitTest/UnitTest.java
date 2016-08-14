@@ -113,7 +113,7 @@ public class UnitTest {
         writer.close();
         System.out.println("done!");
 
-        ArcEagerBeamTrainer trainer = new ArcEagerBeamTrainer(options.useMaxViol ? "max_violation" : "early", new AveragedPerceptron(featureLength, dependencyLabels.size(),maps),
+        ArcEagerBeamTrainer trainer = new ArcEagerBeamTrainer(options.useMaxViol ? "max_violation" : "early", new AveragedPerceptron(featureLength, dependencyLabels.size(),maps,true),
                 options, dependencyLabels, featureLength, maps);
         trainer.train(dataSet, options.devPath, options.trainingIter, options.modelFile, options.lowercase, options.punctuations, options.partialTrainingStartingIteration,options.inputFile);
         trainer = null;

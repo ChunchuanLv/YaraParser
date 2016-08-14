@@ -153,7 +153,7 @@ public class MyTest {
 
 		System.out.print("writing objects....");
 
-		AveragedPerceptron per = new AveragedPerceptron(featureLength, dependencyLabels.size(), maps);
+		AveragedPerceptron per = new AveragedPerceptron(featureLength, dependencyLabels.size(), maps,true);
 		for (int i = 0; i < 100; i++)
 			test(i, options, featureLength, dataSet, per);
 

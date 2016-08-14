@@ -69,7 +69,6 @@ public class IndexMaps implements Serializable {
         ArrayList<Integer> bc4 = new ArrayList<Integer>();
         ArrayList<Integer> bc6 = new ArrayList<Integer>();
         ArrayList<Integer> bcf = new ArrayList<Integer>();
-
         int i = 0;
         for (String word : words) {
             if (word.length() == 0)

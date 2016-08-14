@@ -117,12 +117,13 @@ public class AveragedPerceptron {
 		this.dependencySize = dependencySize;
 	}
 
-	public AveragedPerceptron(int featSize, int dependencySize, IndexMaps maps) {
+	public AveragedPerceptron(int featSize, int dependencySize, IndexMaps maps,boolean tanh) {
 		// TODO Auto-generated constructor stub
 		this(featSize, dependencySize);
 		wordRep = maps.getWordRep();
 		contRep = maps.getContRep();
 		labelRep = maps.getLabelRep();
+		this.tanh = tanh;
 		depMat = labelRep == null || labelRep.size() > 0;
 		dep = (featSize == 27) || (featSize == 73) || (featSize == 154);
 		wdp = maps.fastCompute();
@@ -145,6 +146,7 @@ public class AveragedPerceptron {
 		reduceFeatureWeights = infStruct.reduceFeatureWeights;
 		leftArcFeatureWeights = infStruct.leftArcFeatureWeights;
 		rightArcFeatureWeights = infStruct.rightArcFeatureWeights;
+		this.tanh =infStruct.options.tanh;
 		wordRep = maps.getWordRep();
 		System.out.println("wordRep " + wordRep.size());
 		contRep = maps.getContRep();
@@ -338,7 +340,7 @@ public class AveragedPerceptron {
 
 		return scores;
 	}
-
+ private boolean tanh = true;
 	private float getCost(int word, int head) {
 
 		if (!wordRep.containsKey(word) || !contRep.containsKey(head)) {
@@ -362,6 +364,7 @@ public class AveragedPerceptron {
 		int size = v1.length;
 		for (int i = 0; i < size; i++)
 			result += v1[i] * v2[i];
+		if (tanh)
 		result = (float) Math.tanh(result);
 		synchronized (wdp) {
 			wdp.put(code, result);
@@ -397,6 +400,7 @@ public class AveragedPerceptron {
 		for (int i = 0; i < size1; i++)
 			for (int j = 0; j < size2; j++)
 				result += v1[i] * v2[j] * m[i][j];
+		if (tanh)
 		result = (float) Math.tanh(result);
 		synchronized (wdp) {
 			wdp.put(code, result);

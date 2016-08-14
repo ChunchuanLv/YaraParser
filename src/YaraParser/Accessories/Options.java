@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Options implements Serializable {
+    public boolean tanh;
     public boolean train;
     public boolean parseTaggedFile;
     public boolean parseConllFile;
@@ -53,6 +54,7 @@ public class Options implements Serializable {
 	public boolean continueTrain;
 
     public Options() {
+    	tanh = true;
     	we = "deps.words";
     	ce = "deps.compcontexts";
     	depe = "deps.dep";
@@ -245,6 +247,8 @@ public class Options implements Serializable {
             	options.depe   = args[i + 1];
             else if (args[i].startsWith("continue"))
             	options.continueTrain = false;
+            else if (args[i].startsWith("tanh"))
+            	options.tanh = false;
         }
 
         if (options.train || options.parseTaggedFile || options.parseConllFile)
@@ -456,6 +460,7 @@ public class Options implements Serializable {
         options.depe = depe;
         options.repPath = repPath;
         options.depMat = depMat;
+        options.tanh = tanh;
         return options;
     }
 }

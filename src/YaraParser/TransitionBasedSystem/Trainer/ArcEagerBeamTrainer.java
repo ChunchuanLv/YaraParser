@@ -128,30 +128,19 @@ public class ArcEagerBeamTrainer {
             	   accuracyOndev = accuracy;
                    infStruct.saveModel(modelPath + "_best" );
                    System.out.println("best iter_"+i);
+
+                   if (!testPath.equals("")) {
+                   	System.out.println("Testing file");
+                       parser.parseConllFile(testPath, modelPath + ".__tmp__",
+                               options.rootFirst, options.beamWidth, true, lowerCased, options.numOfThreads, false, "");
+                     Evaluator.evaluate(testPath, modelPath + ".__tmp__", punctuations);
+                    
+                 
+                   }
                }
                 parser.shutDownLiveThreads();
             }
             
-            if (!testPath.equals("")) {
-            	System.out.println("Testing file");
-                AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct,maps);
-
-                int raSize = averagedPerceptron.raSize();
-                int effectiveRaSize = averagedPerceptron.effectiveRaSize();
-                float raRatio = 100.0f * effectiveRaSize / raSize;
-
-                int laSize = averagedPerceptron.laSize();
-                int effectiveLaSize = averagedPerceptron.effectiveLaSize();
-                float laRatio = 100.0f * effectiveLaSize / laSize;
-
-               KBeamArcEagerParser parser = new KBeamArcEagerParser(averagedPerceptron, dependencyRelations, featureLength, maps, options.numOfThreads,options.repPath=="",options.depMat);
-
-                parser.parseConllFile(testPath, modelPath + ".__tmp__",
-                        options.rootFirst, options.beamWidth, true, lowerCased, options.numOfThreads, false, "");
-               double accuracy= Evaluator.evaluate(testPath, modelPath + ".__tmp__", punctuations);
-             
-                parser.shutDownLiveThreads();
-            }
             
         }
         boolean isTerminated = executor.isTerminated();
