@@ -99,11 +99,9 @@ public class ArcEagerBeamTrainer {
             long timeSec = (end - start) / 1000;
             System.out.println("iteration "+i+" took " + timeSec + " seconds\n");
 
-            System.out.print("saving the model...");
             InfStruct infStruct = new InfStruct(classifier, maps, dependencyRelations, options);
           //  infStruct.saveModel(modelPath + "_iter" + i);
 
-            System.out.println("done\n");
 
             if (!devPath.equals("")) {
                 AveragedPerceptron averagedPerceptron = new AveragedPerceptron(infStruct,maps);
@@ -126,8 +124,10 @@ public class ArcEagerBeamTrainer {
                double accuracy= Evaluator.evaluate(devPath, modelPath + ".__tmp__", punctuations);
                if (accuracy >accuracyOndev) {
             	   accuracyOndev = accuracy;
-                   infStruct.saveModel(modelPath + "_best" );
                    System.out.println("best iter_"+i);
+                   System.out.print("saving the model...");
+                   infStruct.saveModel(modelPath + "_best" );
+                   System.out.println("done\n");
 
                    if (!testPath.equals("")) {
                    	System.out.println("Testing file");

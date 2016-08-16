@@ -286,7 +286,7 @@ public class AveragedPerceptron {
 				return scores;
 			int head;
 			int word;
-			if (left) {
+			if (!left) {
 				head = (int) (long) features[4] - 2;
 				word = (int) (long) features[1] - 2;
 			} else {
@@ -318,7 +318,7 @@ public class AveragedPerceptron {
 				return scores;
 			int head;
 			int word;
-			if (left) {
+			if (!left) {
 				head = (int) (long) features[4] - 2;
 				word = (int) (long) features[1] - 2;
 			} else {
