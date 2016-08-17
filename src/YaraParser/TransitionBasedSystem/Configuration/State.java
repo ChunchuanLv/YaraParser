@@ -90,11 +90,13 @@ public class State implements Cloneable {
             if (rightMostArcs[head] == 0 || dependent > rightMostArcs[head])
                 rightMostArcs[head] = dependent;
             rightValency[head] += 1;
+            if (dependency<64)
             rightDepLabels[head] = rightDepLabels[head] | value;  //bitwise sign for dependencys
 
         } else { //left dependency
             if (leftMostArcs[head] == 0 || dependent < leftMostArcs[head])
                 leftMostArcs[head] = dependent;
+            if (dependency<64)
             leftDepLabels[head] = leftDepLabels[head] | value;
             leftValency[head] += 1;
         }
