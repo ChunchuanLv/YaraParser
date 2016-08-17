@@ -36,8 +36,11 @@ public class MyTest {
 	public static void main(String[] args) throws Exception {
 		String s = " 0 1";
 		String[] sv = s.split("[\t ]");
-		for (int i = 0; i < sv.length; i++)
-			System.out.println("" + i + ":" + sv[i]);
+		for (int i = 0; i < 65; i++) {
+
+			BigInteger v = BigInteger.valueOf(1<<i);
+			System.out.println("" + i + ":" + v+" bitwised ");
+		}
 		// options.useExtendedFeatures = false;
 
 		// ArrayList<Options> optionList =
